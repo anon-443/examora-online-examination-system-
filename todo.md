@@ -143,4 +143,4 @@
 - [x] Tighten unnecessary desktop vertical gaps around the pathway, catalogue, assessment preview, and leaderboard sections.
 - [x] Validate the homepage spacing refinement on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
 - [x] Refine the homepage hero headline, supporting copy, calls to action, and proof-point alignment to strengthen the text-to-artwork relationship.
-- [ ] Validate the refined hero typography on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Validate the refined hero typography on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
