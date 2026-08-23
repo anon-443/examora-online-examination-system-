@@ -110,7 +110,7 @@ export default function Home() {
           <div className="hero-orb hero-orb-one" />
           <div className="hero-orb hero-orb-two" />
           <div className="hero-grid" />
-          <div className="container relative grid min-h-[455px] -translate-y-7 items-center gap-7 py-5 sm:-translate-y-5 sm:gap-10 sm:py-8 lg:min-h-[510px] lg:-translate-y-2 lg:grid-cols-[0.92fr_1.08fr] lg:py-6">
+          <div className="container relative grid min-h-[455px] -translate-y-4 items-center gap-7 py-5 sm:-translate-y-2 sm:gap-10 sm:py-8 lg:min-h-[510px] lg:translate-y-1 lg:grid-cols-[0.92fr_1.08fr] lg:py-6">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -162,7 +162,7 @@ export default function Home() {
         </section>
 
         <section className="border-y border-slate-200 bg-white/80 py-6 backdrop-blur sm:py-7 dark:border-white/10 dark:bg-slate-900/50">
-          <div className="container grid -translate-y-1 gap-4 text-center sm:grid-cols-3 sm:text-left">
+          <div className="container grid -translate-y-2 gap-4 text-center sm:grid-cols-3 sm:text-left">
             {[[BookOpenCheck, "Purposeful practice", "Curated, structured assessments"], [Trophy, "Meaningful feedback", "Clear outcome summaries"], [ShieldCheck, "Secure by role", "Student and admin access controls"]].map(([Icon, title, copy]) => {
               const FeatureIcon = Icon as typeof BookOpenCheck;
               return <div key={String(title)} className="flex items-center justify-center gap-3 sm:justify-start"><span className="grid size-9 place-items-center rounded-xl bg-emerald-50 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300"><FeatureIcon className="size-5" /></span><div><p className="text-[15px] font-bold">{String(title)}</p><p className="text-[13px] text-slate-500 dark:text-slate-400">{String(copy)}</p></div></div>;

@@ -152,3 +152,6 @@
 - [x] Validate the return-to-home navigation on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
 - [x] Lift the three-item reassurance strip slightly upward while retaining its current alignment and responsive behavior.
 - [x] Validate the reassurance-strip position correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Lower the complete hero composition slightly while preserving its internal text-to-artwork alignment.
+- [x] Raise the reassurance-strip content further without changing its three-column layout.
+- [ ] Validate the coordinated placement correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
