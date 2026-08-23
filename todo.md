@@ -126,3 +126,8 @@
 - [x] Add restrained academic visual accents that strengthen hierarchy without adding clutter or motion burden.
 - [x] Extend restrained visual accents into shared learner and instructor surfaces, then revalidate desktop and mobile hierarchy.
 - [x] Validate the visual readability refinement across responsive key screens, save a managed checkpoint, and synchronize GitHub main.
+- [x] Lower the entire aligned hero text-and-image composition further without obscuring the reassurance strip.
+- [x] Add a persistent learner-selectable text-size preference with accessible default, comfortable, and large options.
+- [x] Add instructor cohort completion trend analytics derived from real assignment and learner progress records.
+- [x] Generate downloadable instructor-ready PDF cohort progress reports from real assignment analytics.
+- [ ] Validate accessibility, reporting, analytics, responsive UI, save a managed checkpoint, and synchronize GitHub main.

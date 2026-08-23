@@ -34,3 +34,17 @@ export function summarizeLearnerAssignments<T extends { attemptStatus?: "in_prog
     completionRate: completionRate(completed, assignments.length),
   };
 }
+
+export function buildCohortCompletionTrend<T extends { id: number; title: string; cohortName: string; scheduledAt: Date | string; completionCount: number; learnerCount: number }>(assignments: T[]) {
+  return [...assignments]
+    .sort((first, second) => new Date(first.scheduledAt).getTime() - new Date(second.scheduledAt).getTime())
+    .map(assignment => ({
+      id: assignment.id,
+      title: assignment.title,
+      cohortName: assignment.cohortName,
+      label: new Date(assignment.scheduledAt).toLocaleDateString(undefined, { month: "short", day: "numeric" }),
+      completion: completionRate(Number(assignment.completionCount), Number(assignment.learnerCount)),
+      completed: Number(assignment.completionCount),
+      learners: Number(assignment.learnerCount),
+    }));
+}

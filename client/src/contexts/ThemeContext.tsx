@@ -1,11 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
+export type TextSize = "default" | "comfortable" | "large";
 
 interface ThemeContextType {
   theme: Theme;
   toggleTheme?: () => void;
   switchable: boolean;
+  textSize: TextSize;
+  setTextSize: (size: TextSize) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -28,6 +31,7 @@ export function ThemeProvider({
     }
     return defaultTheme;
   });
+  const [textSize, setTextSize] = useState<TextSize>(() => (localStorage.getItem("examora-text-size") as TextSize) || "default");
 
   useEffect(() => {
     const root = document.documentElement;
@@ -42,6 +46,12 @@ export function ThemeProvider({
     }
   }, [theme, switchable]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.textSize = textSize;
+    localStorage.setItem("examora-text-size", textSize);
+  }, [textSize]);
+
   const toggleTheme = switchable
     ? () => {
         setTheme(prev => (prev === "light" ? "dark" : "light"));
@@ -49,7 +59,7 @@ export function ThemeProvider({
     : undefined;
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, switchable }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, switchable, textSize, setTextSize }}>
       {children}
     </ThemeContext.Provider>
   );

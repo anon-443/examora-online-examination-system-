@@ -5,6 +5,7 @@ import { ArrowRight, LayoutDashboard, Menu, ShieldCheck, X } from "lucide-react"
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ThemeToggle } from "./ThemeToggle";
+import { TextSizeControl } from "./TextSizeControl";
 import { NotificationBell } from "./NotificationBell";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
@@ -65,6 +66,7 @@ export function SiteHeader() {
         </nav>
         <div className="hidden items-center gap-2 xl:flex">
           <NotificationBell />
+          <TextSizeControl />
           <ThemeToggle />
           {loading ? <div className="h-9 w-24 animate-pulse rounded-full bg-slate-100 dark:bg-white/10" /> : user ? (
             <DropdownMenu>
@@ -91,6 +93,7 @@ export function SiteHeader() {
         </div>
         <div className="flex items-center gap-1 lg:hidden">
           <NotificationBell />
+          <TextSizeControl />
           <ThemeToggle />
           <Button variant="ghost" size="icon" onClick={() => setOpen(value => !value)} className="rounded-full" aria-label="Open navigation">
             {open ? <X className="size-5" /> : <Menu className="size-5" />}

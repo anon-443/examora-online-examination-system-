@@ -1,4 +1,4 @@
-import { completionRate, getAssignmentProgressState, summarizeLearnerAssignments } from "../shared/collaborationProgress";
+import { buildCohortCompletionTrend, completionRate, getAssignmentProgressState, summarizeLearnerAssignments } from "../shared/collaborationProgress";
 import { describe, expect, it } from "vitest";
 
 describe("collaboration progress helpers", () => {
@@ -21,5 +21,15 @@ describe("collaboration progress helpers", () => {
       { scheduledAt: "2030-01-20T00:00:00.000Z", dueAt: "2030-02-10T00:00:00.000Z", attemptStatus: "in_progress" as const },
     ], now);
     expect(summary).toEqual({ total: 3, completed: 1, inProgress: 1, dueSoon: 1, overdue: 0, completionRate: 33 });
+  });
+
+  it("builds a chronological cohort completion trend from real assignment counts", () => {
+    expect(buildCohortCompletionTrend([
+      { id: 2, title: "Second check-in", cohortName: "Reasoning", scheduledAt: "2030-02-08T09:00:00.000Z", completionCount: 4, learnerCount: 4 },
+      { id: 1, title: "First check-in", cohortName: "Reasoning", scheduledAt: "2030-02-01T09:00:00.000Z", completionCount: 1, learnerCount: 4 },
+    ])).toEqual([
+      expect.objectContaining({ id: 1, completion: 25, completed: 1, learners: 4 }),
+      expect.objectContaining({ id: 2, completion: 100, completed: 4, learners: 4 }),
+    ]);
   });
 });
