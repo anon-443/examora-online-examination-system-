@@ -62,8 +62,13 @@ export const attemptRouter = router({
     const source = await db.getExamWithQuestions(attempt.examId);
     if (!source) throw new TRPCError({ code: "NOT_FOUND", message: "Assessment not found." });
     const answers = await db.getAttemptAnswers(attempt.id);
-    const selectedAnswers = new Map(answers.map(answer => [answer.questionId, answer.selectedOption]));
+    const selectedAnswers = new Map(
+      answers
+        .filter((answer): answer is typeof answer & { selectedOption: number } => answer.selectedOption !== null)
+        .map(answer => [answer.questionId, answer.selectedOption] as const),
+    );
     const result = calculateAssessmentScore(source.questions, selectedAnswers);
+    await db.finalizeAttemptAnswers(attempt.id, source.questions, selectedAnswers);
     await db.submitAttempt({
       attemptId: attempt.id,
       score: result.score,
@@ -75,13 +80,14 @@ export const attemptRouter = router({
   result: protectedProcedure.input(attemptInput).query(async ({ input, ctx }) => {
     const result = await db.getAttemptResult(input.attemptId, ctx.user.id);
     if (!result || result.status !== "submitted") return null;
+    const review = await db.getAttemptReview(input.attemptId);
     const summary =
       result.percentage >= 85
         ? "Excellent work. You demonstrated strong mastery of this assessment."
         : result.percentage >= 65
           ? "Good progress. Review the missed concepts to strengthen your understanding."
           : "Keep learning. Revisit the topic and try another assessment when you are ready.";
-    return { ...result, summary };
+    return { ...result, summary, review };
   }),
   history: protectedProcedure.query(({ ctx }) => db.listAttemptHistory(ctx.user.id)),
   leaderboard: publicProcedure.query(async () => {

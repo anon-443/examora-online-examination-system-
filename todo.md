@@ -13,9 +13,15 @@
 - [x] Add refined interaction feedback, page reveals, and reduced-motion support.
 - [x] Add and run automated tests for scoring, authorization, and assessment workflows.
 - [x] Verify desktop and mobile presentation, save a checkpoint, and provide project delivery details.
-- [ ] Save a verified project checkpoint after the completed validation pass.
-- [ ] Provide the final project handoff summary and checkpoint reference.
+- [x] Save a verified project checkpoint after the completed validation pass.
+- [x] Provide the final project handoff summary and checkpoint reference.
 - [x] Add referential integrity and guarded deletion to preserve exam attempts, answers, history, and leaderboard data.
 - [x] Correct assessment submission persistence and surface save or submission errors to students.
 - [x] Extend administrative content management with edit flows for existing assessments.
 - [x] Add automated coverage for attempt start, answer saving, submission, results, history, and leaderboard workflows.
+- [x] Add an administrator-only AI question generator that produces reviewable MCQs from a topic and difficulty selection.
+- [x] Add explanation fields to questions and store a submitted learner answer snapshot for reliable post-exam review.
+- [x] Build a detailed result-review view showing each prompt, selected answer, correct answer, and explanation.
+- [x] Add downloadable passing certificates and detailed performance-report PDFs for eligible completed attempts.
+- [x] Add automated tests for AI authorization, detailed result retrieval, and certificate/report eligibility.
+- [ ] Verify the new admin and student flows, save an updated checkpoint, and provide an enhancement handoff.

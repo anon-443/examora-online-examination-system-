@@ -160,6 +160,7 @@ export async function createQuestion(input: {
   optionC: string;
   optionD: string;
   correctOption: number;
+  explanation: string;
   position: number;
 }) {
   const db = await getDb();
@@ -186,6 +187,7 @@ export async function updateQuestion(
     optionC: string;
     optionD: string;
     correctOption: number;
+    explanation: string;
     position: number;
   }>,
 ) {
@@ -234,6 +236,44 @@ export async function getAttemptAnswers(attemptId: number) {
   return db.select().from(attemptAnswers).where(eq(attemptAnswers.attemptId, attemptId));
 }
 
+export async function finalizeAttemptAnswers(
+  attemptId: number,
+  sourceQuestions: Array<{
+    id: number;
+    prompt: string;
+    optionA: string;
+    optionB: string;
+    optionC: string;
+    optionD: string;
+    correctOption: number;
+    explanation: string;
+  }>,
+  selectedAnswers: Map<number, number>,
+) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+
+  for (const question of sourceQuestions) {
+    const selectedOption = selectedAnswers.get(question.id) ?? null;
+    const isCorrect = selectedOption === question.correctOption;
+    const snapshot = {
+      selectedOption,
+      isCorrect,
+      questionPromptSnapshot: question.prompt,
+      optionASnapshot: question.optionA,
+      optionBSnapshot: question.optionB,
+      optionCSnapshot: question.optionC,
+      optionDSnapshot: question.optionD,
+      correctOptionSnapshot: question.correctOption,
+      explanationSnapshot: question.explanation,
+    };
+    await db
+      .insert(attemptAnswers)
+      .values({ attemptId, questionId: question.id, ...snapshot })
+      .onDuplicateKeyUpdate({ set: { ...snapshot, updatedAt: new Date() } });
+  }
+}
+
 export async function submitAttempt(input: {
   attemptId: number;
   score: number;
@@ -274,6 +314,27 @@ export async function getAttemptResult(attemptId: number, userId: number) {
     .where(and(eq(examAttempts.id, attemptId), eq(examAttempts.userId, userId)))
     .limit(1);
   return attempt;
+}
+
+export async function getAttemptReview(attemptId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db
+    .select({
+      questionId: attemptAnswers.questionId,
+      selectedOption: attemptAnswers.selectedOption,
+      isCorrect: attemptAnswers.isCorrect,
+      prompt: attemptAnswers.questionPromptSnapshot,
+      optionA: attemptAnswers.optionASnapshot,
+      optionB: attemptAnswers.optionBSnapshot,
+      optionC: attemptAnswers.optionCSnapshot,
+      optionD: attemptAnswers.optionDSnapshot,
+      correctOption: attemptAnswers.correctOptionSnapshot,
+      explanation: attemptAnswers.explanationSnapshot,
+    })
+    .from(attemptAnswers)
+    .where(eq(attemptAnswers.attemptId, attemptId))
+    .orderBy(asc(attemptAnswers.questionId));
 }
 
 export async function listAttemptHistory(userId: number) {

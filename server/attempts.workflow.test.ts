@@ -3,7 +3,9 @@ import type { TrpcContext } from "./_core/context";
 
 const db = vi.hoisted(() => ({
   createAttempt: vi.fn(),
+  finalizeAttemptAnswers: vi.fn(),
   getAttemptAnswers: vi.fn(),
+  getAttemptReview: vi.fn(),
   getAttemptResult: vi.fn(),
   getExamWithQuestions: vi.fn(),
   getLeaderboardRows: vi.fn(),
@@ -38,8 +40,8 @@ function context(): TrpcContext {
 const source = {
   exam: { id: 7, status: "published", title: "Foundations", subject: "Science", durationMinutes: 20 },
   questions: [
-    { id: 101, correctOption: 1, prompt: "Question one", optionA: "A", optionB: "B", optionC: "C", optionD: "D", position: 1 },
-    { id: 102, correctOption: 2, prompt: "Question two", optionA: "A", optionB: "B", optionC: "C", optionD: "D", position: 2 },
+    { id: 101, correctOption: 1, prompt: "Question one", optionA: "A", optionB: "B", optionC: "C", optionD: "D", explanation: "B is the correct scientific response.", position: 1 },
+    { id: 102, correctOption: 2, prompt: "Question two", optionA: "A", optionB: "B", optionC: "C", optionD: "D", explanation: "C is supported by the core concept.", position: 2 },
   ],
 };
 
@@ -50,6 +52,7 @@ beforeEach(() => {
   db.getOwnedAttempt.mockResolvedValue({ id: 44, examId: 7, userId: 1, status: "in_progress", startedAt: new Date() });
   db.getAttemptAnswers.mockResolvedValue([{ questionId: 101, selectedOption: 1 }, { questionId: 102, selectedOption: 0 }]);
   db.getAttemptResult.mockResolvedValue({ id: 44, status: "submitted", score: 1, incorrectAnswers: 1, percentage: 50, totalQuestions: 2, examTitle: "Foundations", subject: "Science" });
+  db.getAttemptReview.mockResolvedValue([{ questionId: 101, selectedOption: 1, isCorrect: true, prompt: "Question one", optionA: "A", optionB: "B", optionC: "C", optionD: "D", correctOption: 1, explanation: "B is the correct scientific response." }]);
   db.listAttemptHistory.mockResolvedValue([{ id: 44, examTitle: "Foundations" }]);
   db.getLeaderboardRows.mockResolvedValue([
     { userId: 1, name: "Learner One", score: 2, percentage: 100, submittedAt: new Date() },
@@ -75,13 +78,14 @@ describe("attempt workflow", () => {
     const result = await appRouter.createCaller(context()).attempts.submit({ attemptId: 44 });
 
     expect(db.submitAttempt).toHaveBeenCalledWith({ attemptId: 44, score: 1, incorrectAnswers: 1, percentage: 50 });
+    expect(db.finalizeAttemptAnswers).toHaveBeenCalledWith(44, source.questions, new Map([[101, 1], [102, 0]]));
     expect(result).toMatchObject({ attemptId: 44, totalQuestions: 2, score: 1, percentage: 50 });
   });
 
   it("returns a result, history record, and one best leaderboard entry per learner", async () => {
     const caller = appRouter.createCaller(context());
 
-    await expect(caller.attempts.result({ attemptId: 44 })).resolves.toMatchObject({ score: 1, percentage: 50 });
+    await expect(caller.attempts.result({ attemptId: 44 })).resolves.toMatchObject({ score: 1, percentage: 50, review: [{ questionId: 101, isCorrect: true }] });
     await expect(caller.attempts.history()).resolves.toEqual([{ id: 44, examTitle: "Foundations" }]);
     await expect(caller.attempts.leaderboard()).resolves.toEqual([{ rank: 1, name: "Learner One", score: 2, percentage: 100 }]);
   });

@@ -25,7 +25,15 @@ export default function ExamRunner() {
   const saveMutation = trpc.attempts.saveAnswer.useMutation({ onError: error => toast.error(`Answer could not be saved: ${error.message}`) });
   const submitMutation = trpc.attempts.submit.useMutation({ onSuccess: result => { submittedRef.current = true; setLocation(`/results/${result.attemptId}`); }, onError: error => toast.error(`Assessment could not be submitted: ${error.message}`) });
 
-  useEffect(() => { if (session) setAnswers(Object.fromEntries(session.answers.map(answer => [answer.questionId, answer.selectedOption]))); }, [session]);
+  useEffect(() => {
+    if (session) {
+      setAnswers(Object.fromEntries(
+        session.answers
+          .filter((answer): answer is typeof answer & { selectedOption: number } => answer.selectedOption !== null)
+          .map(answer => [answer.questionId, answer.selectedOption] as const),
+      ));
+    }
+  }, [session]);
   useEffect(() => { if (!session) return; const interval = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(interval); }, [session]);
   const secondsLeft = useMemo(() => session ? remainingSeconds(session.attempt.startedAt, session.exam.durationMinutes, now) : 0, [session, now]);
   const unanswered = session ? session.questions.filter(question => answers[question.id] === undefined).length : 0;
