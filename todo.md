@@ -137,5 +137,5 @@
 - [x] Extend the new visual storytelling system into Practice Lab and learner assignment surfaces with responsive validation.
 - [x] Revalidate the latest Practice Lab artwork and learner task-progress visual accents at the mobile breakpoint.
 - [x] Remove the specified bottom artwork caption from the homepage hero while retaining the visual overlay balance.
-- [ ] Validate the hero-caption correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Validate the hero-caption correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
 - [x] Validate the expanded visual system across desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
