@@ -50,14 +50,14 @@ export function SiteHeader() {
 
   return (
     <header className={`sticky top-0 z-50 border-b border-slate-200/70 bg-[hsl(var(--page)/0.82)] backdrop-blur-xl transition-shadow dark:border-white/10 ${scrolled ? "shadow-[0_2px_12px_rgba(0,0,0,0.06)]" : ""}`}>
-      <div className="container flex h-[76px] items-center justify-between gap-4">
+      <div className="container flex h-[68px] items-center justify-between gap-3 sm:h-[76px] sm:gap-4">
         <Brand />
         <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary navigation">
           {links.map(link => (
             <Link
               key={link.href}
               href={link.href}
-              className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${location === link.href ? "bg-slate-100 text-slate-950 dark:bg-white/10 dark:text-white" : "text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"}`}
+              className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${location === link.href ? "bg-slate-100 text-slate-950 dark:bg-white/10 dark:text-white" : "text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"}`}
             >
               {link.label}
             </Link>
@@ -101,7 +101,8 @@ export function SiteHeader() {
         {open ? (
           <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }} className="border-t border-slate-200 bg-[hsl(var(--page))] px-5 py-4 shadow-lg dark:border-white/10 lg:hidden">
             <nav className="mx-auto flex max-w-xl flex-col gap-1" aria-label="Mobile navigation">
-              {links.map(link => <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">{link.label}</Link>)}
+              <p className="px-4 pb-2 text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-300">Navigate Examora</p>
+              {links.map(link => <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className={`min-h-11 rounded-xl px-4 py-3 text-sm font-semibold ${location === link.href ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-400/10 dark:text-emerald-200" : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10"}`}>{link.label}</Link>)}
               {user ? <>
                 <Link href="/profile" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">My profile</Link>
                 <Link href="/history" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">My activity</Link>
