@@ -2,6 +2,7 @@ import { and, asc, count, desc, eq, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
   attemptAnswers,
+  examFeedback,
   exams,
   type InsertUser,
   examAttempts,
@@ -336,6 +337,31 @@ export async function getAttemptReview(attemptId: number) {
     .from(attemptAnswers)
     .where(eq(attemptAnswers.attemptId, attemptId))
     .orderBy(asc(attemptAnswers.questionId));
+}
+
+export async function getAttemptFeedback(attemptId: number, userId: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(examFeedback).where(and(eq(examFeedback.attemptId, attemptId), eq(examFeedback.userId, userId))).limit(1);
+  return result[0];
+}
+
+export async function upsertAttemptFeedback(input: { attemptId: number; userId: number; difficultyRating: number; comment: string | null }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.insert(examFeedback).values(input).onDuplicateKeyUpdate({ set: { difficultyRating: input.difficultyRating, comment: input.comment } });
+}
+
+export async function listAdminFeedback() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select({ id: examFeedback.id, difficultyRating: examFeedback.difficultyRating, comment: examFeedback.comment, createdAt: examFeedback.createdAt, studentName: users.name, examTitle: exams.title, subject: exams.subject, percentage: examAttempts.percentage })
+    .from(examFeedback)
+    .innerJoin(examAttempts, eq(examFeedback.attemptId, examAttempts.id))
+    .innerJoin(exams, eq(examAttempts.examId, exams.id))
+    .innerJoin(users, eq(examFeedback.userId, users.id))
+    .orderBy(desc(examFeedback.createdAt))
+    .limit(24);
 }
 
 export async function listAttemptHistory(userId: number) {

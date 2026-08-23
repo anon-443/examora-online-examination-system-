@@ -59,3 +59,6 @@
 - [x] Add server-level tests for invalid MIME type, oversized payloads, and invalid PDF signatures during context upload.
 - [x] Add server-level tests for owned versus foreign PDF-context authorization during question generation.
 - [x] Add a mocked server-level test confirming an owned PDF context proceeds into question generation.
+- [x] Restore the final-release CSV export, auto-save timestamp, post-exam feedback, and analytics feedback-review features after the managed reset.
+- [ ] Revalidate the restored release and save it using the managed checkpoint workflow before GitHub handoff.
+- [ ] Deliver the final release handoff with the new checkpoint and GitHub/domain status.

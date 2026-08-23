@@ -38,6 +38,7 @@ export const adminRouter = router({
   exams: adminProcedure.query(() => db.listAdminExams()),
   participation: adminProcedure.query(() => db.listParticipation()),
   analytics: adminProcedure.query(() => db.getAdminAnalytics()),
+  feedback: adminProcedure.query(() => db.listAdminFeedback()),
   examDetails: adminProcedure
     .input(z.object({ examId: z.number().int().positive() }))
     .query(({ input }) => db.getExamWithQuestions(input.examId)),

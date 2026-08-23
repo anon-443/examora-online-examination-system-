@@ -90,6 +90,17 @@ export const attemptRouter = router({
     const review = await db.getAttemptReview(input.attemptId);
     return { ...result, summary: attemptSummary(result.percentage), review };
   }),
+  feedback: protectedProcedure.input(attemptInput).query(async ({ input, ctx }) => {
+    const result = await db.getAttemptResult(input.attemptId, ctx.user.id);
+    if (!result || result.status !== "submitted") throw new TRPCError({ code: "FORBIDDEN", message: "Feedback is available after submission." });
+    return db.getAttemptFeedback(input.attemptId, ctx.user.id);
+  }),
+  saveFeedback: protectedProcedure.input(attemptInput.extend({ difficultyRating: z.number().int().min(1).max(5), comment: z.string().trim().max(1200).optional() })).mutation(async ({ input, ctx }) => {
+    const result = await db.getAttemptResult(input.attemptId, ctx.user.id);
+    if (!result || result.status !== "submitted") throw new TRPCError({ code: "FORBIDDEN", message: "Feedback is available after submission." });
+    await db.upsertAttemptFeedback({ attemptId: input.attemptId, userId: ctx.user.id, difficultyRating: input.difficultyRating, comment: input.comment || null });
+    return { success: true } as const;
+  }),
   history: protectedProcedure.query(({ ctx }) => db.listAttemptHistory(ctx.user.id)),
   documents: protectedProcedure.query(async ({ ctx }) => {
     const history = await db.listAttemptHistory(ctx.user.id);

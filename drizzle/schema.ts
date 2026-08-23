@@ -117,6 +117,25 @@ export const attemptAnswers = mysqlTable(
   ],
 );
 
+export const examFeedback = mysqlTable(
+  "examFeedback",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    attemptId: int("attemptId").notNull(),
+    userId: int("userId").notNull(),
+    difficultyRating: int("difficultyRating").notNull(),
+    comment: text("comment"),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => [
+    uniqueIndex("exam_feedback_attempt_uq").on(table.attemptId),
+    index("exam_feedback_user_idx").on(table.userId),
+    foreignKey({ columns: [table.attemptId], foreignColumns: [examAttempts.id], name: "exam_feedback_attempt_fk" }).onDelete("cascade"),
+    foreignKey({ columns: [table.userId], foreignColumns: [users.id], name: "exam_feedback_user_fk" }).onDelete("restrict"),
+  ],
+);
+
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 export type Exam = typeof exams.$inferSelect;

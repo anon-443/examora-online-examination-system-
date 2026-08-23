@@ -152,3 +152,18 @@ export function buildAdminAnalytics(attempts: AnalyticsAttempt[], answers: Analy
 export function isOwnedPdfContextKey(contextKey: string, userId: number) {
   return contextKey.startsWith(`exam-context/${userId}/`);
 }
+
+function csvCell(value: string | number) {
+  const text = String(value);
+  return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+}
+
+export function buildAnalyticsCsv(analytics: ReturnType<typeof buildAdminAnalytics>) {
+  const rows: Array<Array<string | number>> = [
+    ["Examora performance statistics"], [], ["Metric", "Value"],
+    ["Completed attempts", analytics.summary.completedAttempts], ["Average achievement", `${analytics.summary.averagePercentage}%`], ["Pass rate", `${analytics.summary.passRate}%`], ["Active learners", analytics.summary.activeStudents], [],
+    ["Subject", "Attempts", "Average achievement"], ...analytics.subjectPerformance.map(item => [item.subject, item.attempts, `${item.averagePercentage}%`]), [],
+    ["Most missed question", "Subject", "Missed responses", "Total responses", "Miss rate"], ...analytics.mostMissedQuestions.map(item => [item.prompt, item.subject, item.missedCount, item.totalResponses, `${item.missRate}%`]),
+  ];
+  return rows.map(row => row.map(csvCell).join(",")).join("\n");
+}

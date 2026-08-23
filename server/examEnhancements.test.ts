@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { achievementShareCopy, achievementShareUrls, buildAdminAnalytics, buildPerformanceTrend, buildSubmissionReview, filterCategorizedExams, filterLeaderboardRows, isGenerationCountValid, isLowTime, isOwnedPdfContextKey, normalizeExamRecovery, toggleQuestionBookmark, updateGeneratedDraft, updateGeneratedDraftOption } from "../shared/examEnhancements";
+import { achievementShareCopy, achievementShareUrls, buildAdminAnalytics, buildAnalyticsCsv, buildPerformanceTrend, buildSubmissionReview, filterCategorizedExams, filterLeaderboardRows, isGenerationCountValid, isLowTime, isOwnedPdfContextKey, normalizeExamRecovery, toggleQuestionBookmark, updateGeneratedDraft, updateGeneratedDraftOption } from "../shared/examEnhancements";
 
 const exams = [
   { subject: "Science", difficulty: "Beginner" as const, id: 1 },
@@ -80,6 +80,12 @@ describe("exam enhancement helpers", () => {
     const analytics = buildAdminAnalytics([{ userId: 1, percentage: 80, subject: "Science" }, { userId: 2, percentage: 50, subject: "Science" }, { userId: 1, percentage: 90, subject: "Math" }], [{ questionId: 10, prompt: "Cell structure", subject: "Science", isCorrect: false }, { questionId: 10, prompt: "Cell structure", subject: "Science", isCorrect: true }, { questionId: 11, prompt: "Fractions", subject: "Math", isCorrect: false }]);
     expect(analytics.summary).toEqual({ completedAttempts: 3, averagePercentage: 73, passRate: 67, activeStudents: 2 });
     expect(analytics.mostMissedQuestions[0]).toMatchObject({ questionId: 11, missedCount: 1, missRate: 100 });
+  });
+
+  it("exports analytics as a CSV and escapes comma-containing question prompts", () => {
+    const csv = buildAnalyticsCsv(buildAdminAnalytics([{ userId: 1, percentage: 80, subject: "Science" }], [{ questionId: 10, prompt: "Name, function", subject: "Science", isCorrect: false }]));
+    expect(csv).toContain("Metric,Value");
+    expect(csv).toContain('"Name, function"');
   });
 
   it("allows PDF context only from the administrator-scoped storage prefix", () => {
