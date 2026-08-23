@@ -155,3 +155,4 @@
 - [x] Lower the complete hero composition slightly while preserving its internal text-to-artwork alignment.
 - [x] Raise the reassurance-strip content further without changing its three-column layout.
 - [x] Validate the coordinated placement correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Audit the completed application against the original online examination system requirements and report coverage accurately.
