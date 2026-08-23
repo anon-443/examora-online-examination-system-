@@ -1,0 +1,33 @@
+export type CategorizedExam = {
+  subject: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
+};
+
+export function filterCategorizedExams<T extends CategorizedExam>(
+  exams: T[],
+  subject: string,
+  difficulty: string,
+) {
+  return exams.filter(exam =>
+    (subject === "" || exam.subject === subject) &&
+    (difficulty === "" || exam.difficulty === difficulty),
+  );
+}
+
+export function isLowTime(secondsRemaining: number, durationMinutes: number) {
+  const threshold = Math.min(300, Math.max(60, Math.round(durationMinutes * 60 * 0.1)));
+  return secondsRemaining > 0 && secondsRemaining <= threshold;
+}
+
+export function achievementShareCopy(studentName: string, examTitle: string, percentage: number) {
+  return `${studentName} has completed ${examTitle} on Examora with ${percentage}% achievement.`;
+}
+
+export function achievementShareUrls(shareUrl: string, copy: string) {
+  const url = encodeURIComponent(shareUrl);
+  const text = encodeURIComponent(copy);
+  return {
+    linkedIn: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+    x: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+  };
+}

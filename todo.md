@@ -24,4 +24,10 @@
 - [x] Build a detailed result-review view showing each prompt, selected answer, correct answer, and explanation.
 - [x] Add downloadable passing certificates and detailed performance-report PDFs for eligible completed attempts.
 - [x] Add automated tests for AI authorization, detailed result retrieval, and certificate/report eligibility.
-- [ ] Verify the new admin and student flows, save an updated checkpoint, and provide an enhancement handoff.
+- [x] Verify the new admin and student flows, save an updated checkpoint, and provide an enhancement handoff.
+- [x] Add sharing actions for eligible student certificates using LinkedIn and X/Twitter share flows.
+- [x] Organize the administrator assessment catalogue with subject and difficulty categories, filters, and summary counts.
+- [x] Add completion progress feedback to the exam runner with a live progress bar and answered-question count.
+- [x] Add an accessible low-time warning state to the exam timer and assessment interface.
+- [x] Add automated tests for sharing payloads, categorization logic, and timer warning thresholds.
+- [ ] Verify responsive student and admin flows, save the updated checkpoint, and provide the enhancement handoff.
