@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Brand } from "@/components/SiteHeader";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { BarChart3, BookOpenCheck, ChevronLeft, ClipboardList, LayoutDashboard, LogOut, Menu, UsersRound, X } from "lucide-react";
+import { BarChart3, BookOpenCheck, ChevronLeft, ClipboardList, LayoutDashboard, LogOut, Menu, ShieldCheck, UsersRound, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Avatar, AvatarFallback } from "./ui/avatar";
@@ -12,6 +12,7 @@ const nav = [
   { label: "Assessments", href: "/admin#assessments", icon: BookOpenCheck },
   { label: "Questions", href: "/admin#questions", icon: ClipboardList },
   { label: "Participation", href: "/admin#participation", icon: UsersRound },
+  { label: "Cohorts", href: "/admin/cohorts", icon: UsersRound },
   { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
 ];
 

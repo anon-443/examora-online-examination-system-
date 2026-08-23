@@ -5,6 +5,7 @@ import { ArrowRight, LayoutDashboard, Menu, ShieldCheck, X } from "lucide-react"
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ThemeToggle } from "./ThemeToggle";
+import { NotificationBell } from "./NotificationBell";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 import {
@@ -63,6 +64,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 xl:flex">
+          <NotificationBell />
           <ThemeToggle />
           {loading ? <div className="h-9 w-24 animate-pulse rounded-full bg-slate-100 dark:bg-white/10" /> : user ? (
             <DropdownMenu>
@@ -79,6 +81,7 @@ export function SiteHeader() {
               <DropdownMenuContent align="end" className="w-52 rounded-xl p-1.5">
                 <DropdownMenuItem asChild><Link href="/profile" className="cursor-pointer rounded-lg">My profile</Link></DropdownMenuItem>
                 <DropdownMenuItem asChild><Link href="/history" className="cursor-pointer rounded-lg">My activity</Link></DropdownMenuItem>
+                <DropdownMenuItem asChild><Link href="/learning" className="cursor-pointer rounded-lg">My learning</Link></DropdownMenuItem>
                 {user.role === "admin" ? <DropdownMenuItem asChild><Link href="/admin" className="cursor-pointer rounded-lg"><LayoutDashboard className="mr-2 size-4" />Administration</Link></DropdownMenuItem> : null}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={logout} className="cursor-pointer rounded-lg text-red-600 focus:text-red-600">Sign out</DropdownMenuItem>
@@ -87,6 +90,7 @@ export function SiteHeader() {
           ) : <><Button onClick={() => startLogin()} variant="outline" className="rounded-full border-emerald-300 px-4 text-sm font-semibold text-emerald-800 hover:bg-emerald-50 dark:border-emerald-400/40 dark:text-emerald-300 dark:hover:bg-emerald-400/10">Sign up free</Button><Button onClick={() => startLogin()} className="rounded-full bg-slate-950 px-4 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100">Sign in <ArrowRight className="ml-1 size-4" /></Button></>}
         </div>
         <div className="flex items-center gap-1 lg:hidden">
+          <NotificationBell />
           <ThemeToggle />
           <Button variant="ghost" size="icon" onClick={() => setOpen(value => !value)} className="rounded-full" aria-label="Open navigation">
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -101,6 +105,7 @@ export function SiteHeader() {
               {user ? <>
                 <Link href="/profile" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">My profile</Link>
                 <Link href="/history" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">My activity</Link>
+                <Link href="/learning" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">My learning</Link>
                 {user.role === "admin" ? <Link href="/admin" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">Administration</Link> : null}
                 <button onClick={logout} className="rounded-xl px-4 py-3 text-left text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10">Sign out</button>
               </> : <div className="mt-2 grid gap-2"><Button onClick={() => startLogin()} variant="outline" className="rounded-xl border-emerald-300 text-emerald-800 dark:border-emerald-400/40 dark:text-emerald-300">Sign up free</Button><Button onClick={() => startLogin()} className="rounded-xl bg-slate-950 text-white dark:bg-white dark:text-slate-950">Sign in to Examora</Button></div>}

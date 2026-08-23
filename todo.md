@@ -76,5 +76,13 @@
 - [x] Elevate the visual system with richer interactive content blocks, micro-interactions, and stronger visual hierarchy.
 - [x] Add practical new destination pages and navigation actions that extend the student product experience.
 - [x] Validate the advanced visual release with automated tests, desktop/mobile screenshots, managed checkpoint, and GitHub synchronization.
-- [ ] Save the advanced visual and product-experience upgrade in a managed checkpoint.
-- [ ] Synchronize the advanced visual release to GitHub main and verify the update remotely.
+- [x] Save the advanced visual and product-experience upgrade in a managed checkpoint.
+- [x] Synchronize the advanced visual release to GitHub main and verify the update remotely.
+- [x] Replace the empty homepage assessment placeholders with clearly labeled, interactive sample assessment content.
+- [x] Complete functional practice quizzes, in-app deadline notifications, instructor cohorts, and assignment scheduling with secure persistence.
+- [x] Connect Practice Lab to database-backed assessments and persisted exam attempts rather than only local sample-quiz state.
+- [x] Add a durable daily deadline-notification job with idempotent user alerts before assignment due times.
+- [x] Add regression coverage for persisted practice launch and proactive deadline notifications.
+- [x] Validate the collaborative learning release across persistence, responsive UI, automated tests, and production build.
+- [ ] Save the validated collaborative learning release in a managed checkpoint.
+- [ ] Synchronize the managed collaborative learning release to GitHub main and verify the remote revision.

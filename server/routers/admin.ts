@@ -5,6 +5,9 @@ import { invokeLLM } from "../_core/llm";
 import { adminProcedure, router } from "../_core/trpc";
 import { storageGetSignedUrl, storagePut } from "../storage";
 import { isOwnedPdfContextKey } from "../../shared/examEnhancements";
+import { parse as parseCookie } from "cookie";
+import { COOKIE_NAME } from "../../shared/const";
+import { createHeartbeatJob } from "../_core/heartbeat";
 
 const examInput = z.object({
   title: z.string().trim().min(3).max(180),
@@ -43,6 +46,19 @@ export const adminRouter = router({
     .input(z.object({ examId: z.number().int().positive() }))
     .query(({ input }) => db.getExamWithQuestions(input.examId)),
   createExam: adminProcedure.input(examInput).mutation(({ input, ctx }) => db.createExam({ ...input, createdBy: ctx.user.id })),
+  seedStarterContent: adminProcedure.mutation(({ ctx }) => db.seedStarterAssessments(ctx.user.id)),
+  deadlineAlertsStatus: adminProcedure.query(async () => {
+    const schedule = await db.getNotificationSchedule("deadline-alerts");
+    return schedule ? { enabled: true, taskUid: schedule.taskUid, updatedAt: schedule.updatedAt } : { enabled: false, taskUid: null, updatedAt: null };
+  }),
+  configureDeadlineAlerts: adminProcedure.mutation(async ({ ctx }) => {
+    const existing = await db.getNotificationSchedule("deadline-alerts");
+    if (existing) return { taskUid: existing.taskUid, existing: true };
+    const sessionToken = parseCookie(ctx.req.headers.cookie ?? "")[COOKIE_NAME] ?? "";
+    const job = await createHeartbeatJob({ name: "examora-deadline-alerts", cron: "0 0 8 * * *", path: "/api/scheduled/deadline-alerts", description: "Daily Examora assignment deadline alerts" }, sessionToken);
+    await db.saveNotificationSchedule({ scheduleKey: "deadline-alerts", taskUid: job.taskUid, createdBy: ctx.user.id });
+    return { taskUid: job.taskUid, existing: false, nextExecutionAt: job.nextExecutionAt ?? null };
+  }),
   updateExam: adminProcedure
     .input(z.object({ examId: z.number().int().positive(), values: examInput.partial() }))
     .mutation(({ input }) => db.updateExam(input.examId, input.values)),

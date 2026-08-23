@@ -69,12 +69,121 @@ export const questions = mysqlTable(
   ],
 );
 
+export const notifications = mysqlTable(
+  "notifications",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    userId: int("userId").notNull(),
+    type: mysqlEnum("type", ["assignment", "deadline", "cohort", "system"]).notNull().default("system"),
+    title: varchar("title", { length: 180 }).notNull(),
+    body: text("body").notNull(),
+    actionHref: varchar("actionHref", { length: 255 }),
+    readAt: timestamp("readAt"),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [
+    index("notifications_user_created_idx").on(table.userId, table.createdAt),
+    index("notifications_user_read_idx").on(table.userId, table.readAt),
+    foreignKey({ columns: [table.userId], foreignColumns: [users.id], name: "notifications_user_fk" }).onDelete("cascade"),
+  ],
+);
+
+export const notificationSchedules = mysqlTable(
+  "notificationSchedules",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    scheduleKey: varchar("scheduleKey", { length: 64 }).notNull().unique(),
+    taskUid: varchar("taskUid", { length: 65 }).notNull().unique(),
+    createdBy: int("createdBy").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => [
+    foreignKey({ columns: [table.createdBy], foreignColumns: [users.id], name: "notification_schedules_creator_fk" }).onDelete("restrict"),
+  ],
+);
+
+export const cohorts = mysqlTable(
+  "cohorts",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    name: varchar("name", { length: 140 }).notNull(),
+    description: text("description"),
+    inviteCode: varchar("inviteCode", { length: 32 }).notNull().unique(),
+    createdBy: int("createdBy").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => [
+    index("cohorts_creator_idx").on(table.createdBy),
+    foreignKey({ columns: [table.createdBy], foreignColumns: [users.id], name: "cohorts_creator_fk" }).onDelete("restrict"),
+  ],
+);
+
+export const cohortMemberships = mysqlTable(
+  "cohortMemberships",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    cohortId: int("cohortId").notNull(),
+    userId: int("userId").notNull(),
+    role: mysqlEnum("role", ["instructor", "learner"]).notNull().default("learner"),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [
+    uniqueIndex("cohort_membership_uq").on(table.cohortId, table.userId),
+    index("cohort_memberships_user_idx").on(table.userId),
+    foreignKey({ columns: [table.cohortId], foreignColumns: [cohorts.id], name: "cohort_memberships_cohort_fk" }).onDelete("cascade"),
+    foreignKey({ columns: [table.userId], foreignColumns: [users.id], name: "cohort_memberships_user_fk" }).onDelete("cascade"),
+  ],
+);
+
+export const assignments = mysqlTable(
+  "assignments",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    cohortId: int("cohortId").notNull(),
+    examId: int("examId").notNull(),
+    title: varchar("title", { length: 180 }).notNull(),
+    instructions: text("instructions"),
+    scheduledAt: timestamp("scheduledAt").notNull(),
+    dueAt: timestamp("dueAt"),
+    status: mysqlEnum("status", ["scheduled", "published", "archived"]).notNull().default("scheduled"),
+    createdBy: int("createdBy").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => [
+    index("assignments_cohort_schedule_idx").on(table.cohortId, table.scheduledAt),
+    index("assignments_exam_idx").on(table.examId),
+    foreignKey({ columns: [table.cohortId], foreignColumns: [cohorts.id], name: "assignments_cohort_fk" }).onDelete("cascade"),
+    foreignKey({ columns: [table.examId], foreignColumns: [exams.id], name: "assignments_exam_fk" }).onDelete("restrict"),
+    foreignKey({ columns: [table.createdBy], foreignColumns: [users.id], name: "assignments_creator_fk" }).onDelete("restrict"),
+  ],
+);
+
+export const notificationDispatches = mysqlTable(
+  "notificationDispatches",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    assignmentId: int("assignmentId").notNull(),
+    userId: int("userId").notNull(),
+    kind: mysqlEnum("kind", ["deadline_soon"]).notNull().default("deadline_soon"),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [
+    uniqueIndex("notification_dispatch_uq").on(table.assignmentId, table.userId, table.kind),
+    foreignKey({ columns: [table.assignmentId], foreignColumns: [assignments.id], name: "notification_dispatches_assignment_fk" }).onDelete("cascade"),
+    foreignKey({ columns: [table.userId], foreignColumns: [users.id], name: "notification_dispatches_user_fk" }).onDelete("cascade"),
+  ],
+);
+
 export const examAttempts = mysqlTable(
   "examAttempts",
   {
     id: int("id").autoincrement().primaryKey(),
     examId: int("examId").notNull(),
     userId: int("userId").notNull(),
+    assignmentId: int("assignmentId"),
     status: mysqlEnum("status", ["in_progress", "submitted"]).notNull().default("in_progress"),
     totalQuestions: int("totalQuestions").notNull(),
     score: int("score").notNull().default(0),
@@ -89,6 +198,26 @@ export const examAttempts = mysqlTable(
     index("attempts_status_idx").on(table.status),
     foreignKey({ columns: [table.examId], foreignColumns: [exams.id], name: "attempts_exam_fk" }).onDelete("restrict"),
     foreignKey({ columns: [table.userId], foreignColumns: [users.id], name: "attempts_user_fk" }).onDelete("restrict"),
+    foreignKey({ columns: [table.assignmentId], foreignColumns: [assignments.id], name: "attempts_assignment_fk" }).onDelete("set null"),
+  ],
+);
+
+export const assignmentAttempts = mysqlTable(
+  "assignmentAttempts",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    assignmentId: int("assignmentId").notNull(),
+    attemptId: int("attemptId").notNull(),
+    userId: int("userId").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [
+    uniqueIndex("assignment_attempt_uq").on(table.assignmentId, table.userId),
+    uniqueIndex("assignment_attempt_attempt_uq").on(table.attemptId),
+    index("assignment_attempts_user_idx").on(table.userId),
+    foreignKey({ columns: [table.assignmentId], foreignColumns: [assignments.id], name: "assignment_attempts_assignment_fk" }).onDelete("cascade"),
+    foreignKey({ columns: [table.attemptId], foreignColumns: [examAttempts.id], name: "assignment_attempts_attempt_fk" }).onDelete("cascade"),
+    foreignKey({ columns: [table.userId], foreignColumns: [users.id], name: "assignment_attempts_user_fk" }).onDelete("cascade"),
   ],
 );
 
@@ -141,3 +270,5 @@ export type InsertUser = typeof users.$inferInsert;
 export type Exam = typeof exams.$inferSelect;
 export type Question = typeof questions.$inferSelect;
 export type ExamAttempt = typeof examAttempts.$inferSelect;
+export type Cohort = typeof cohorts.$inferSelect;
+export type Assignment = typeof assignments.$inferSelect;
