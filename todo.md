@@ -106,5 +106,13 @@
 - [x] Widen and rebalance command-center copy regions so desktop sentences do not wrap awkwardly.
 - [x] Remove remaining landing-page vertical gaps without reducing mobile readability.
 - [x] Validate the precision layout correction across desktop/mobile screenshots, TypeScript, tests, and production build.
-- [ ] Save the precision landing-page correction in a managed checkpoint.
-- [ ] Synchronize the precision landing-page correction to GitHub main and verify the remote revision.
+- [x] Save the precision landing-page correction in a managed checkpoint.
+- [x] Synchronize the precision landing-page correction to GitHub main and verify the remote revision.
+- [x] Use the remaining desktop first-viewport space while preserving the repaired hero alignment and full reassurance strip.
+- [x] Center pathway-card and subject-card content, icons, and actions vertically within their panels.
+- [x] Ensure real starter assessments are available through the catalogue and persisted Practice Lab workflow.
+- [x] Finalize instructor cohort-assignment publishing and scheduling with visible learner access.
+- [x] Activate and verify durable upcoming-exam and deadline notifications without duplicate delivery.
+- [x] Validate the alignment, assessment, publishing, notification, responsive UI, TypeScript, tests, and production build.
+- [ ] Save the validated alignment and collaboration release in a managed checkpoint.
+- [ ] Synchronize the managed alignment and collaboration release to GitHub main and verify the remote revision.
