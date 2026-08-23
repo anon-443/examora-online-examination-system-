@@ -1,0 +1,6 @@
+ALTER TABLE `attemptAnswers` ADD CONSTRAINT `attempt_answers_attempt_fk` FOREIGN KEY (`attemptId`) REFERENCES `examAttempts`(`id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `attemptAnswers` ADD CONSTRAINT `attempt_answers_question_fk` FOREIGN KEY (`questionId`) REFERENCES `questions`(`id`) ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `examAttempts` ADD CONSTRAINT `attempts_exam_fk` FOREIGN KEY (`examId`) REFERENCES `exams`(`id`) ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `examAttempts` ADD CONSTRAINT `attempts_user_fk` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `exams` ADD CONSTRAINT `exams_created_by_users_fk` FOREIGN KEY (`createdBy`) REFERENCES `users`(`id`) ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `questions` ADD CONSTRAINT `questions_exam_fk` FOREIGN KEY (`examId`) REFERENCES `exams`(`id`) ON DELETE cascade ON UPDATE no action;

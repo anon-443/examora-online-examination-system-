@@ -1,0 +1,21 @@
+# Project TODO
+
+- [x] Establish a refined light and dark visual system with responsive typography, accessible contrast, and motion preferences.
+- [x] Build the public landing page with platform overview, exam discovery preview, primary calls to action, About and Contact navigation, and footer.
+- [x] Implement authenticated student access and role-based authorization for the admin area.
+- [x] Define and migrate the exam, question, attempt, answer, and leaderboard data model.
+- [x] Build the exam catalogue showing title, subject, duration, question count, difficulty, and a protected start action.
+- [x] Create the timed MCQ assessment experience with answer selection, navigation, progress controls, validation, and mobile support.
+- [x] Calculate and persist submitted results, then present score, correct/incorrect counts, percentage, and a performance summary.
+- [x] Build student assessment history for reviewing previous attempts and results.
+- [x] Build the leaderboard from completed exam results.
+- [x] Build the protected admin dashboard for managing exams, questions, and participation records.
+- [x] Add refined interaction feedback, page reveals, and reduced-motion support.
+- [x] Add and run automated tests for scoring, authorization, and assessment workflows.
+- [x] Verify desktop and mobile presentation, save a checkpoint, and provide project delivery details.
+- [ ] Save a verified project checkpoint after the completed validation pass.
+- [ ] Provide the final project handoff summary and checkpoint reference.
+- [x] Add referential integrity and guarded deletion to preserve exam attempts, answers, history, and leaderboard data.
+- [x] Correct assessment submission persistence and surface save or submission errors to students.
+- [x] Extend administrative content management with edit flows for existing assessments.
+- [x] Add automated coverage for attempt start, answer saving, submission, results, history, and leaderboard workflows.
