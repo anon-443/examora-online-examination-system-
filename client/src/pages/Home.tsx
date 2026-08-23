@@ -115,28 +115,28 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-              className="relative z-10 -translate-y-7 -mb-7 max-w-xl sm:-translate-y-10 sm:-mb-10 lg:-translate-y-14 lg:-mb-14"
+              className="relative z-10 -translate-y-4 -mb-4 max-w-[36rem] sm:-translate-y-6 sm:-mb-6 lg:-translate-y-7 lg:-mb-7"
             >
               <motion.div variants={reveal}>
-                <Badge className="rounded-full border-0 bg-emerald-100 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-emerald-800 dark:bg-emerald-400/15 dark:text-emerald-300">
+                <Badge className="rounded-full border-0 bg-emerald-100 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-800 shadow-[0_8px_18px_-14px_rgba(5,150,105,0.65)] dark:bg-emerald-400/15 dark:text-emerald-300">
                   <Sparkles className="mr-1.5 size-3" />Assessment considered
                 </Badge>
               </motion.div>
-              <motion.h1 variants={reveal} className="mt-5 font-display text-[clamp(3rem,5vw,4.65rem)] font-semibold leading-[0.95] tracking-[-0.065em] text-slate-950 dark:text-white">
+              <motion.h1 variants={reveal} className="mt-5 font-display text-[clamp(3.05rem,4.55vw,4.45rem)] font-semibold leading-[0.93] tracking-[-0.062em] text-slate-950 dark:text-white">
                 Assess with <span className="text-emerald-600 dark:text-emerald-400">clarity</span><br />Grow with intent
               </motion.h1>
-              <motion.p variants={reveal} className="mt-6 max-w-[34rem] text-base leading-7 text-slate-600 sm:text-lg dark:text-slate-300">
+              <motion.p variants={reveal} className="mt-6 max-w-[35rem] text-[1.02rem] leading-7 text-slate-600 sm:text-[1.1rem] sm:leading-8 dark:text-slate-300">
                 Discover well-structured assessments, stay focused in a calm exam room, and turn every result into your next best step
               </motion.p>
-              <motion.div variants={reveal} className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button onClick={startFirst} disabled={startMutation.isPending} size="lg" className="rounded-xl bg-slate-950 px-6 font-semibold text-white shadow-[0_12px_24px_-12px_rgba(15,23,42,0.7)] hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100">
+              <motion.div variants={reveal} className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Button onClick={startFirst} disabled={startMutation.isPending} size="lg" className="min-h-12 rounded-xl bg-slate-950 px-7 font-semibold text-white shadow-[0_14px_26px_-13px_rgba(15,23,42,0.72)] hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100">
                   {startMutation.isPending ? "Preparing assessment…" : user ? "Start an assessment" : "Begin your journey"}<ArrowRight className="ml-1.5 size-4" />
                 </Button>
-                <Button asChild variant="outline" size="lg" className="rounded-xl border-slate-200 bg-white/60 px-6 font-semibold text-slate-800 hover:bg-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:hover:bg-white/10">
+                <Button asChild variant="outline" size="lg" className="min-h-12 rounded-xl border-slate-200 bg-white/70 px-6 font-semibold text-slate-800 shadow-sm hover:bg-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:hover:bg-white/10">
                   <Link href="/exams"><Compass className="mr-1.5 size-4" />Explore catalogue</Link>
                 </Button>
               </motion.div>
-              <motion.div variants={reveal} className="mt-10 flex flex-wrap gap-x-5 gap-y-3 text-xs font-semibold text-slate-600 dark:text-slate-300">
+              <motion.div variants={reveal} className="mt-8 flex max-w-[35rem] flex-wrap gap-x-5 gap-y-3 border-l-2 border-emerald-400/60 pl-3 text-[13px] font-semibold text-slate-600 dark:border-emerald-400/55 dark:text-slate-300">
                 {[[Clock3, "Timed assessment flow"], [History, "Personal result history"], [ShieldCheck, "Role-secured platform"]].map(([Icon, label]) => {
                   const FeatureIcon = Icon as typeof Clock3;
                   return <span key={String(label)} className="inline-flex items-center gap-1.5"><FeatureIcon className="size-4 text-emerald-600" />{String(label)}</span>;
