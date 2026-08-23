@@ -84,5 +84,5 @@
 - [x] Add a durable daily deadline-notification job with idempotent user alerts before assignment due times.
 - [x] Add regression coverage for persisted practice launch and proactive deadline notifications.
 - [x] Validate the collaborative learning release across persistence, responsive UI, automated tests, and production build.
-- [ ] Save the validated collaborative learning release in a managed checkpoint.
-- [ ] Synchronize the managed collaborative learning release to GitHub main and verify the remote revision.
+- [x] Save the validated collaborative learning release in a managed checkpoint.
+- [x] Synchronize the managed collaborative learning release to GitHub main and verify the remote revision.
