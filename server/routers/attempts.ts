@@ -6,6 +6,12 @@ import { calculateAssessmentScore } from "../scoring";
 import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
 
 const attemptInput = z.object({ attemptId: z.number().int().positive() });
+const attemptSummary = (percentage: number) =>
+  percentage >= 85
+    ? "Excellent work. You demonstrated strong mastery of this assessment."
+    : percentage >= 65
+      ? "Good progress. Review the missed concepts to strengthen your understanding."
+      : "Keep learning. Revisit the topic and try another assessment when you are ready.";
 
 export const attemptRouter = router({
   session: protectedProcedure.input(attemptInput).query(async ({ input, ctx }) => {
@@ -82,15 +88,19 @@ export const attemptRouter = router({
     const result = await db.getAttemptResult(input.attemptId, ctx.user.id);
     if (!result || result.status !== "submitted") return null;
     const review = await db.getAttemptReview(input.attemptId);
-    const summary =
-      result.percentage >= 85
-        ? "Excellent work. You demonstrated strong mastery of this assessment."
-        : result.percentage >= 65
-          ? "Good progress. Review the missed concepts to strengthen your understanding."
-          : "Keep learning. Revisit the topic and try another assessment when you are ready.";
-    return { ...result, summary, review };
+    return { ...result, summary: attemptSummary(result.percentage), review };
   }),
   history: protectedProcedure.query(({ ctx }) => db.listAttemptHistory(ctx.user.id)),
+  documents: protectedProcedure.query(async ({ ctx }) => {
+    const history = await db.listAttemptHistory(ctx.user.id);
+    const completed = history.filter(item => item.status === "submitted");
+    return Promise.all(completed.map(async item => {
+      const result = await db.getAttemptResult(item.id, ctx.user.id);
+      if (!result || result.status !== "submitted") return null;
+      const review = await db.getAttemptReview(item.id);
+      return { ...result, attemptId: item.id, totalQuestions: item.totalQuestions, summary: attemptSummary(result.percentage), review };
+    })).then(items => items.filter((item): item is NonNullable<typeof item> => item !== null));
+  }),
   leaderboard: publicProcedure.input(z.object({ subject: z.string().trim().max(96).default(""), period: z.enum(["all", "weekly", "monthly"]).default("all") }).optional()).query(async ({ input }) => {
     const rows = filterLeaderboardRows(await db.getLeaderboardRows(), input?.subject ?? "", (input?.period ?? "all") as LeaderboardPeriod);
     const bestByStudent = new Map<number, (typeof rows)[number]>();

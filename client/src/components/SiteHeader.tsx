@@ -68,6 +68,7 @@ export function SiteHeader() {
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-52 rounded-xl p-1.5">
+                <DropdownMenuItem asChild><Link href="/profile" className="cursor-pointer rounded-lg">My profile</Link></DropdownMenuItem>
                 <DropdownMenuItem asChild><Link href="/history" className="cursor-pointer rounded-lg">My activity</Link></DropdownMenuItem>
                 {user.role === "admin" ? <DropdownMenuItem asChild><Link href="/admin" className="cursor-pointer rounded-lg"><LayoutDashboard className="mr-2 size-4" />Administration</Link></DropdownMenuItem> : null}
                 <DropdownMenuSeparator />
@@ -93,6 +94,7 @@ export function SiteHeader() {
             <nav className="mx-auto flex max-w-xl flex-col gap-1" aria-label="Mobile navigation">
               {links.map(link => <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">{link.label}</Link>)}
               {user ? <>
+                <Link href="/profile" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">My profile</Link>
                 <Link href="/history" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">My activity</Link>
                 {user.role === "admin" ? <Link href="/admin" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">Administration</Link> : null}
                 <button onClick={logout} className="rounded-xl px-4 py-3 text-left text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10">Sign out</button>

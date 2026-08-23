@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { achievementShareCopy, achievementShareUrls, filterCategorizedExams, filterLeaderboardRows, isGenerationCountValid, isLowTime, toggleQuestionBookmark } from "../shared/examEnhancements";
+import { achievementShareCopy, achievementShareUrls, buildPerformanceTrend, buildSubmissionReview, filterCategorizedExams, filterLeaderboardRows, isGenerationCountValid, isLowTime, toggleQuestionBookmark, updateGeneratedDraft, updateGeneratedDraftOption } from "../shared/examEnhancements";
 
 const exams = [
   { subject: "Science", difficulty: "Beginner" as const, id: 1 },
@@ -49,5 +49,26 @@ describe("exam enhancement helpers", () => {
     expect(isGenerationCountValid(8)).toBe(true);
     expect(isGenerationCountValid(0)).toBe(false);
     expect(isGenerationCountValid(9)).toBe(false);
+  });
+
+  it("summarizes answered, unanswered, and flagged questions before submission", () => {
+    expect(buildSubmissionReview([10, 11, 12], { 10: 2, 12: 0 }, new Set([11, 12]))).toEqual({ answeredCount: 2, unansweredQuestionIds: [11], flaggedQuestionIds: [11, 12] });
+  });
+
+  it("orders completed assessment performance chronologically for profile trends", () => {
+    const trend = buildPerformanceTrend([
+      { id: 2, examTitle: "Later", score: 8, percentage: 80, status: "submitted", submittedAt: new Date("2026-08-20T12:00:00.000Z") },
+      { id: 1, examTitle: "Earlier", score: 6, percentage: 60, status: "submitted", submittedAt: new Date("2026-08-10T12:00:00.000Z") },
+      { id: 3, examTitle: "Active", score: 0, percentage: 0, status: "in_progress", submittedAt: null },
+    ]);
+    expect(trend.map(item => item.id)).toEqual([1, 2]);
+    expect(trend.map(item => item.percentage)).toEqual([60, 80]);
+  });
+
+  it("updates every editable generated-draft field before it is moved into the question builder", () => {
+    const drafts = [{ prompt: "Original prompt", options: ["A", "B", "C", "D"] as [string, string, string, string], correctOption: 0, explanation: "Original explanation" }];
+    const revised = updateGeneratedDraft(drafts, 0, { prompt: "Revised prompt", correctOption: 2, explanation: "Revised explanation" });
+    const revisedOptions = updateGeneratedDraftOption(revised, 0, 1, "Revised B");
+    expect(revisedOptions[0]).toEqual({ prompt: "Revised prompt", options: ["A", "Revised B", "C", "D"], correctOption: 2, explanation: "Revised explanation" });
   });
 });

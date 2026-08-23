@@ -35,6 +35,15 @@
 - [x] Make AI question difficulty and generated-question count prominent, validated generation controls in the admin studio.
 - [x] Add leaderboard subject and time-period filters with weekly and monthly ranking behavior.
 - [x] Add automated coverage for bookmark interactions, AI generation limits, and leaderboard filter logic.
-- [ ] Verify the updated student, admin, and leaderboard flows, save the checkpoint, and provide the handoff.
+- [x] Verify the updated student, admin, and leaderboard flows, save the checkpoint, and provide the handoff.
 - [x] Source leaderboard subject options from completed ranking records so retired or unpublished assessment subjects remain filterable.
 - [x] Re-verify the leaderboard filter interface on desktop and mobile after correcting its subject source.
+- [x] Add a pre-submission summary modal showing answered, unanswered, and flagged questions with direct navigation before final submission.
+- [x] Make AI-generated draft prompts, options, correct answers, and explanations editable before moving them into the question builder.
+- [x] Create a protected student profile page with exam history, eligible certificate/report downloads, and performance trend charts.
+- [x] Add profile navigation and reusable certificate/document download access from student history.
+- [x] Add automated coverage for pre-submission summary metrics, editable AI draft updates, and performance-trend calculations.
+- [ ] Verify the final student, admin, and assessment flows, save the checkpoint, and provide the handoff.
+- [x] Add eligible performance-report downloads to the student profile certificate library.
+- [x] Add reusable certificate and performance-report download actions directly within student history.
+- [x] Add testable generated-draft editing helpers and automated coverage for prompt, options, correct-answer, and explanation updates.

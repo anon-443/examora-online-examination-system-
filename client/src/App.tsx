@@ -12,6 +12,7 @@ import { About, Contact } from "./pages/InfoPages";
 import Leaderboard from "./pages/Leaderboard";
 import NotFound from "./pages/NotFound";
 import Result from "./pages/Result";
+import Profile from "./pages/Profile";
 
 function ScrollToTop() { const [location] = useLocation(); return <Route path={location}>{() => { window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); return null; }}</Route>; }
 
@@ -22,6 +23,7 @@ function Router() {
     <Route path="/exams/:examId/attempt/:attemptId" component={ExamRunner} />
     <Route path="/results/:attemptId" component={Result} />
     <Route path="/history" component={History} />
+    <Route path="/profile" component={Profile} />
     <Route path="/leaderboard" component={Leaderboard} />
     <Route path="/about" component={About} />
     <Route path="/contact" component={Contact} />

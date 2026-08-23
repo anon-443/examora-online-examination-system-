@@ -63,3 +63,54 @@ export function toggleQuestionBookmark(bookmarks: Set<number>, questionId: numbe
 export function isGenerationCountValid(count: number) {
   return Number.isInteger(count) && count >= 1 && count <= 8;
 }
+
+export function buildSubmissionReview(questionIds: number[], answers: Record<number, number>, bookmarks: Set<number>) {
+  const unansweredQuestionIds = questionIds.filter(questionId => answers[questionId] === undefined);
+  const flaggedQuestionIds = questionIds.filter(questionId => bookmarks.has(questionId));
+  return {
+    answeredCount: questionIds.length - unansweredQuestionIds.length,
+    unansweredQuestionIds,
+    flaggedQuestionIds,
+  };
+}
+
+export type PerformanceHistoryRow = {
+  id: number;
+  examTitle: string;
+  score: number;
+  percentage: number;
+  status: string;
+  submittedAt: Date | string | null;
+};
+
+export function buildPerformanceTrend(rows: PerformanceHistoryRow[]) {
+  return rows
+    .filter(row => row.status === "submitted" && row.submittedAt)
+    .sort((first, second) => new Date(first.submittedAt as Date | string).getTime() - new Date(second.submittedAt as Date | string).getTime())
+    .map(row => ({
+      id: row.id,
+      assessment: row.examTitle,
+      percentage: row.percentage,
+      score: row.score,
+      label: new Date(row.submittedAt as Date | string).toLocaleDateString(undefined, { month: "short", day: "numeric" }),
+    }));
+}
+
+export type EditableGeneratedDraft = {
+  prompt: string;
+  options: readonly string[];
+  correctOption: number;
+  explanation: string;
+};
+
+export function updateGeneratedDraft<T extends EditableGeneratedDraft>(drafts: T[], index: number, update: Partial<Pick<EditableGeneratedDraft, "prompt" | "correctOption" | "explanation">>) {
+  return drafts.map((draft, draftIndex) => draftIndex === index ? { ...draft, ...update } as T : draft);
+}
+
+export function updateGeneratedDraftOption<T extends EditableGeneratedDraft>(drafts: T[], draftIndex: number, optionIndex: number, value: string) {
+  return drafts.map((draft, index) => {
+    if (index !== draftIndex) return draft;
+    const options = draft.options.map((option, currentIndex) => currentIndex === optionIndex ? value : option);
+    return { ...draft, options } as T;
+  });
+}
