@@ -110,7 +110,7 @@ export default function Home() {
           <div className="hero-orb hero-orb-one" />
           <div className="hero-orb hero-orb-two" />
           <div className="hero-grid" />
-          <div className="container relative grid min-h-[455px] translate-y-5 items-center gap-7 py-5 sm:translate-y-7 sm:gap-10 sm:py-8 lg:min-h-[510px] lg:translate-y-10 lg:grid-cols-[0.92fr_1.08fr] lg:py-6">
+          <div className="container relative grid min-h-[455px] -translate-y-7 items-center gap-7 py-5 sm:-translate-y-5 sm:gap-10 sm:py-8 lg:min-h-[510px] lg:-translate-y-2 lg:grid-cols-[0.92fr_1.08fr] lg:py-6">
             <motion.div
               initial="hidden"
               animate="visible"

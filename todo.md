@@ -146,3 +146,7 @@
 - [x] Validate the refined hero typography on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
 - [x] Increase the visible scale of header, footer, capability cards, assessment preview, and pathway typography and controls.
 - [x] Validate the scale refinement on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Lift the complete aligned hero composition upward by approximately half an inch without changing its internal balance.
+- [ ] Validate the precise hero-position correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Add a clear Home action to the shared desktop and mobile navigation menus.
+- [ ] Validate the return-to-home navigation on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.

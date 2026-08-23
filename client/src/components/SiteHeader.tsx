@@ -18,6 +18,7 @@ import {
 } from "./ui/dropdown-menu";
 
 const links = [
+  { label: "Home", href: "/" },
   { label: "Explore exams", href: "/exams" },
   { label: "Practice", href: "/practice" },
   { label: "Study hub", href: "/study-hub" },
