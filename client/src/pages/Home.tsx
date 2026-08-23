@@ -109,7 +109,7 @@ export default function Home() {
           <div className="hero-orb hero-orb-one" />
           <div className="hero-orb hero-orb-two" />
           <div className="hero-grid" />
-          <div className="container relative grid min-h-[500px] items-center gap-8 py-8 sm:gap-12 sm:py-12 lg:grid-cols-[0.92fr_1.08fr] lg:py-10">
+          <div className="container relative grid min-h-[455px] items-center gap-7 py-5 sm:gap-10 sm:py-8 lg:grid-cols-[0.92fr_1.08fr] lg:py-6">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -152,14 +152,14 @@ export default function Home() {
                   <span className="hidden size-11 shrink-0 place-items-center rounded-full border border-white/20 bg-white/10 backdrop-blur sm:grid"><Play className="ml-0.5 size-4 fill-current" /></span>
                 </div>
               </div>
-              <div className="relative ml-3 mt-3 hidden w-fit rounded-2xl border border-white/80 bg-white/95 p-3.5 shadow-[0_18px_36px_-18px_rgba(15,23,42,0.45)] backdrop-blur md:block dark:border-white/10 dark:bg-slate-900/95">
+              <div className="absolute left-4 top-4 hidden w-fit rounded-2xl border border-white/80 bg-white/95 p-3.5 shadow-[0_18px_36px_-18px_rgba(15,23,42,0.45)] backdrop-blur md:block dark:border-white/10 dark:bg-slate-900/95">
                 <div className="flex items-center gap-3"><span className="grid size-8 place-items-center rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-400/15 dark:text-amber-300"><Clock3 className="size-4" /></span><div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Focus mode</p><p className="text-[15px] font-bold text-slate-800 dark:text-white">Every minute matters</p></div></div>
               </div>
             </motion.div>
           </div>
         </section>
 
-        <section className="border-y border-slate-200 bg-white/80 py-5 backdrop-blur dark:border-white/10 dark:bg-slate-900/50">
+        <section className="border-y border-slate-200 bg-white/80 py-4 backdrop-blur dark:border-white/10 dark:bg-slate-900/50">
           <div className="container grid gap-4 text-center sm:grid-cols-3 sm:text-left">
             {[[BookOpenCheck, "Purposeful practice", "Curated, structured assessments"], [Trophy, "Meaningful feedback", "Clear outcome summaries"], [ShieldCheck, "Secure by role", "Student and admin access controls"]].map(([Icon, title, copy]) => {
               const FeatureIcon = Icon as typeof BookOpenCheck;
@@ -168,13 +168,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="container py-12 sm:py-18">
+        <section className="container py-10 sm:py-14">
           <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} variants={reveal} className="spark-grid relative overflow-hidden rounded-[2rem] bg-slate-950 p-7 text-white shadow-[0_24px_60px_-30px_rgba(15,23,42,0.8)] sm:p-9">
               <div className="absolute -right-14 -top-12 size-48 rounded-full bg-emerald-400/20 blur-2xl" />
               <p className="relative text-[11px] font-bold uppercase tracking-[0.1em] text-emerald-300">Your learning command center</p>
-              <h2 className="relative mt-3 max-w-lg font-display text-3xl font-semibold tracking-[-0.05em] sm:text-4xl">Build momentum before you begin</h2>
-              <p className="relative mt-4 max-w-xl text-sm leading-6 text-slate-300">Use focused study spaces, practice sprints, and a simple exam guide to shape an intentional assessment routine</p>
+              <h2 className="relative mt-3 font-display text-3xl font-semibold tracking-[-0.05em] sm:text-4xl xl:whitespace-nowrap">Build momentum before you begin</h2>
+              <p className="relative mt-4 text-sm leading-6 text-slate-300 lg:max-w-none">Use focused study spaces, practice sprints, and a simple exam guide to shape an intentional assessment routine</p>
               <div className="relative mt-7 flex flex-wrap gap-3"><Button asChild className="rounded-xl bg-emerald-400 font-bold text-slate-950 hover:bg-emerald-300"><Link href="/practice">Launch Practice Lab <ArrowRight className="ml-1.5 size-4" /></Link></Button><Button asChild variant="outline" className="rounded-xl border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"><Link href="/study-hub">Open Study Hub</Link></Button></div>
               <div className="relative mt-9 grid gap-3 sm:grid-cols-3">
                 {[[Target, "Plan", "Pick a focus"], [Clock3, "Practice", "Work with pace"], [History, "Reflect", "Review the result"]].map(([Icon, title, copy], index) => {
@@ -184,8 +184,8 @@ export default function Home() {
               </div>
             </motion.div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <Link href="/exam-guide" className="interactive-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900"><span className="absolute right-5 top-5 grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300"><ShieldCheck className="size-5" /></span><p className="mt-11 font-display text-xl font-semibold text-slate-950 dark:text-white">Exam-ready guide</p><p className="mt-2 max-w-sm text-sm leading-6 text-slate-600 dark:text-slate-400">A practical checklist for before, during, and after your assessment</p><span className="mt-5 inline-flex items-center text-sm font-bold text-emerald-700 dark:text-emerald-300">Open guide <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" /></span></Link>
-              <Link href="/profile" className="interactive-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900"><span className="absolute right-5 top-5 grid size-12 place-items-center rounded-2xl bg-violet-50 text-violet-700 dark:bg-violet-400/10 dark:text-violet-300"><History className="size-5" /></span><p className="mt-11 font-display text-xl font-semibold text-slate-950 dark:text-white">Review your growth</p><p className="mt-2 max-w-sm text-sm leading-6 text-slate-600 dark:text-slate-400">Return to your private history, trend charts, reports, and achievements</p><span className="mt-5 inline-flex items-center text-sm font-bold text-violet-700 dark:text-violet-300">View profile <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" /></span></Link>
+              <Link href="/exam-guide" className="interactive-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900"><span className="absolute right-5 top-5 grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300"><ShieldCheck className="size-5" /></span><p className="mt-11 font-display text-xl font-semibold text-slate-950 dark:text-white">Exam-ready guide</p><p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400 xl:whitespace-nowrap">A practical checklist for before, during, and after your assessment</p><span className="mt-5 inline-flex items-center text-sm font-bold text-emerald-700 dark:text-emerald-300">Open guide <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" /></span></Link>
+              <Link href="/profile" className="interactive-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900"><span className="absolute right-5 top-5 grid size-12 place-items-center rounded-2xl bg-violet-50 text-violet-700 dark:bg-violet-400/10 dark:text-violet-300"><History className="size-5" /></span><p className="mt-11 font-display text-xl font-semibold text-slate-950 dark:text-white">Review your growth</p><p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400 xl:whitespace-nowrap">Return to your private history, trend charts, reports, and achievements</p><span className="mt-5 inline-flex items-center text-sm font-bold text-violet-700 dark:text-violet-300">View profile <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" /></span></Link>
             </div>
           </div>
         </section>

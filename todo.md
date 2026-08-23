@@ -100,5 +100,11 @@
 - [x] Add tasteful visual accents and motion while preserving reduced-motion accessibility and consistent controls.
 - [x] Optimize key public and product screens for mobile layouts, typography, tap targets, and navigation.
 - [x] Validate the visual-refinement release across responsive routes, TypeScript, automated tests, and production build.
-- [ ] Save the validated visual-refinement release in a managed checkpoint.
-- [ ] Synchronize the managed visual-refinement release to GitHub main and verify the remote revision.
+- [x] Save the validated visual-refinement release in a managed checkpoint.
+- [x] Synchronize the managed visual-refinement release to GitHub main and verify the remote revision.
+- [x] Keep the repaired hero image and copy alignment while fitting the reassurance strip inside the first desktop viewport.
+- [x] Widen and rebalance command-center copy regions so desktop sentences do not wrap awkwardly.
+- [x] Remove remaining landing-page vertical gaps without reducing mobile readability.
+- [x] Validate the precision layout correction across desktop/mobile screenshots, TypeScript, tests, and production build.
+- [ ] Save the precision landing-page correction in a managed checkpoint.
+- [ ] Synchronize the precision landing-page correction to GitHub main and verify the remote revision.
