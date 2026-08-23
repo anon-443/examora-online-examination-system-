@@ -6,16 +6,14 @@ Examora is a full-stack React, Express, tRPC, and MySQL examination platform. It
 
 | Item | Final release status |
 |---|---|
-| Source repository | `https://github.com/anon-443/examora-online-examination-system-` |
+| Source repository | `https://github.com/anon-443/examora-online-examination-system-` — successfully uploaded to `main` |
 | Release validation | TypeScript check passed; 33 automated tests passed across 10 test files |
 | Managed preview | Available through the project preview environment |
 | Reusable implementation skill | `/home/ubuntu/skills/online-examination-platform/SKILL.md` |
 
 ## GitHub source upload
 
-The project repository exists, but previous pushes and GitHub API writes returned an HTTP 403 permission error from the integration credential. The source must **not** be represented as uploaded until a push succeeds. The project has been checkpointed in the managed environment so that the complete source can be exported without relying on an unverified remote push.
-
-To complete the upload, use the project’s **Settings → GitHub** panel and export this project to `anon-443/examora-online-examination-system-`, or authorize a GitHub token/account that has **Contents: Read and write** access to that repository. After authorization, push the current project branch and confirm that the default branch contains the release files.
+The release source has been successfully uploaded to the supplied repository’s `main` branch. The final managed checkpoint is retained as the project recovery point, while GitHub now contains the application source and the accompanying handoff guide.
 
 ## External-domain decision
 
