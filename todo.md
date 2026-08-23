@@ -132,8 +132,8 @@
 - [x] Generate downloadable instructor-ready PDF cohort progress reports from real assignment analytics.
 - [x] Validate accessibility, reporting, analytics, responsive UI, save a managed checkpoint, and synchronize GitHub main.
 - [x] Redesign the homepage subject catalogue with richer subject-specific visuals, hierarchy, and interactions.
-- [ ] Validate the refreshed subject discovery experience on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Validate the refreshed subject discovery experience on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
 - [x] Add cohesive, meaningful visual storytelling to sparse homepage and learning-product surfaces without compromising accessibility or performance.
 - [x] Extend the new visual storytelling system into Practice Lab and learner assignment surfaces with responsive validation.
 - [x] Revalidate the latest Practice Lab artwork and learner task-progress visual accents at the mobile breakpoint.
-- [ ] Validate the expanded visual system across desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Validate the expanded visual system across desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
