@@ -31,3 +31,35 @@ export function achievementShareUrls(shareUrl: string, copy: string) {
     x: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
   };
 }
+
+export type LeaderboardPeriod = "all" | "weekly" | "monthly";
+
+export function leaderboardPeriodStart(period: LeaderboardPeriod, now = new Date()) {
+  if (period === "all") return null;
+  const cutoff = new Date(now);
+  cutoff.setDate(cutoff.getDate() - (period === "weekly" ? 7 : 30));
+  return cutoff;
+}
+
+export function filterLeaderboardRows<T extends { subject: string; submittedAt: Date | string | null }>(
+  rows: T[],
+  subject: string,
+  period: LeaderboardPeriod,
+  now = new Date(),
+) {
+  const cutoff = leaderboardPeriodStart(period, now);
+  return rows.filter(row =>
+    (subject === "" || row.subject === subject) &&
+    (!cutoff || (row.submittedAt !== null && new Date(row.submittedAt) >= cutoff)),
+  );
+}
+
+export function toggleQuestionBookmark(bookmarks: Set<number>, questionId: number) {
+  const next = new Set(bookmarks);
+  if (next.has(questionId)) next.delete(questionId); else next.add(questionId);
+  return next;
+}
+
+export function isGenerationCountValid(count: number) {
+  return Number.isInteger(count) && count >= 1 && count <= 8;
+}

@@ -55,8 +55,8 @@ beforeEach(() => {
   db.getAttemptReview.mockResolvedValue([{ questionId: 101, selectedOption: 1, isCorrect: true, prompt: "Question one", optionA: "A", optionB: "B", optionC: "C", optionD: "D", correctOption: 1, explanation: "B is the correct scientific response." }]);
   db.listAttemptHistory.mockResolvedValue([{ id: 44, examTitle: "Foundations" }]);
   db.getLeaderboardRows.mockResolvedValue([
-    { userId: 1, name: "Learner One", score: 2, percentage: 100, submittedAt: new Date() },
-    { userId: 1, name: "Learner One", score: 1, percentage: 50, submittedAt: new Date() },
+    { userId: 1, name: "Learner One", score: 2, percentage: 100, submittedAt: new Date(), subject: "Science" },
+    { userId: 1, name: "Learner One", score: 1, percentage: 50, submittedAt: new Date(), subject: "Science" },
   ]);
 });
 
@@ -87,6 +87,7 @@ describe("attempt workflow", () => {
 
     await expect(caller.attempts.result({ attemptId: 44 })).resolves.toMatchObject({ score: 1, percentage: 50, review: [{ questionId: 101, isCorrect: true }] });
     await expect(caller.attempts.history()).resolves.toEqual([{ id: 44, examTitle: "Foundations" }]);
-    await expect(caller.attempts.leaderboard()).resolves.toEqual([{ rank: 1, name: "Learner One", score: 2, percentage: 100 }]);
+    await expect(caller.attempts.leaderboard()).resolves.toEqual([{ rank: 1, name: "Learner One", score: 2, percentage: 100, subject: "Science" }]);
+    await expect(caller.attempts.leaderboardSubjects()).resolves.toEqual(["Science"]);
   });
 });

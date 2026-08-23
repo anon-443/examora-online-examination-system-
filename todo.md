@@ -30,4 +30,11 @@
 - [x] Add completion progress feedback to the exam runner with a live progress bar and answered-question count.
 - [x] Add an accessible low-time warning state to the exam timer and assessment interface.
 - [x] Add automated tests for sharing payloads, categorization logic, and timer warning thresholds.
-- [ ] Verify responsive student and admin flows, save the updated checkpoint, and provide the enhancement handoff.
+- [x] Verify responsive student and admin flows, save the updated checkpoint, and provide the enhancement handoff.
+- [x] Add question bookmarks in the timed exam runner with an explicit flagged-for-review state and navigation support.
+- [x] Make AI question difficulty and generated-question count prominent, validated generation controls in the admin studio.
+- [x] Add leaderboard subject and time-period filters with weekly and monthly ranking behavior.
+- [x] Add automated coverage for bookmark interactions, AI generation limits, and leaderboard filter logic.
+- [ ] Verify the updated student, admin, and leaderboard flows, save the checkpoint, and provide the handoff.
+- [x] Source leaderboard subject options from completed ranking records so retired or unpublished assessment subjects remain filterable.
+- [x] Re-verify the leaderboard filter interface on desktop and mobile after correcting its subject source.

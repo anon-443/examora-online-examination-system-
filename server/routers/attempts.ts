@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import * as db from "../db";
+import { filterLeaderboardRows, type LeaderboardPeriod } from "../../shared/examEnhancements";
 import { calculateAssessmentScore } from "../scoring";
 import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
 
@@ -90,8 +91,8 @@ export const attemptRouter = router({
     return { ...result, summary, review };
   }),
   history: protectedProcedure.query(({ ctx }) => db.listAttemptHistory(ctx.user.id)),
-  leaderboard: publicProcedure.query(async () => {
-    const rows = await db.getLeaderboardRows();
+  leaderboard: publicProcedure.input(z.object({ subject: z.string().trim().max(96).default(""), period: z.enum(["all", "weekly", "monthly"]).default("all") }).optional()).query(async ({ input }) => {
+    const rows = filterLeaderboardRows(await db.getLeaderboardRows(), input?.subject ?? "", (input?.period ?? "all") as LeaderboardPeriod);
     const bestByStudent = new Map<number, (typeof rows)[number]>();
     rows.forEach(row => {
       if (!bestByStudent.has(row.userId)) bestByStudent.set(row.userId, row);
@@ -101,6 +102,11 @@ export const attemptRouter = router({
       name: row.name || "Learner",
       score: row.score,
       percentage: row.percentage,
+      subject: row.subject,
     }));
+  }),
+  leaderboardSubjects: publicProcedure.query(async () => {
+    const rows = await db.getLeaderboardRows();
+    return Array.from(new Set(rows.map(row => row.subject))).sort();
   }),
 });

@@ -367,9 +367,11 @@ export async function getLeaderboardRows() {
       score: examAttempts.score,
       percentage: examAttempts.percentage,
       submittedAt: examAttempts.submittedAt,
+      subject: exams.subject,
     })
     .from(examAttempts)
     .innerJoin(users, eq(examAttempts.userId, users.id))
+    .innerJoin(exams, eq(examAttempts.examId, exams.id))
     .where(eq(examAttempts.status, "submitted"))
     .orderBy(desc(examAttempts.percentage), desc(examAttempts.score), asc(examAttempts.submittedAt));
 }
