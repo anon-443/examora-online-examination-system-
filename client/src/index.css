@@ -78,9 +78,9 @@
 }
 
 * { border-color: hsl(var(--border)); }
-html { scroll-behavior: smooth; }
-html[data-text-size="comfortable"] { font-size: 17px; }
-html[data-text-size="large"] { font-size: 18px; }
+html { font-size: 17px; scroll-behavior: smooth; }
+html[data-text-size="comfortable"] { font-size: 18px; }
+html[data-text-size="large"] { font-size: 19px; }
 body { margin: 0; min-width: 320px; background: hsl(var(--page)); color: hsl(var(--foreground)); font-family: var(--font-sans); font-size: 1.025rem; }
 p { text-align: justify; text-align-last: left; }
 small, .text-xs { font-size: 0.8125rem !important; line-height: 1.25rem; }

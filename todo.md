@@ -144,3 +144,5 @@
 - [x] Validate the homepage spacing refinement on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
 - [x] Refine the homepage hero headline, supporting copy, calls to action, and proof-point alignment to strengthen the text-to-artwork relationship.
 - [x] Validate the refined hero typography on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Increase the visible scale of header, footer, capability cards, assessment preview, and pathway typography and controls.
+- [ ] Validate the scale refinement on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
