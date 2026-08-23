@@ -154,4 +154,4 @@
 - [x] Validate the reassurance-strip position correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
 - [x] Lower the complete hero composition slightly while preserving its internal text-to-artwork alignment.
 - [x] Raise the reassurance-strip content further without changing its three-column layout.
-- [ ] Validate the coordinated placement correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Validate the coordinated placement correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
