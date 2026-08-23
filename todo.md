@@ -69,5 +69,6 @@
 - [x] Add GitHub Actions CI to install dependencies, type-check, test, and build on pull requests and main-branch pushes.
 - [x] Complete and refine the public homepage with the requested learning path, subject catalogue, exam preview, leaderboard, outcome proof, and layout corrections.
 - [x] Validate documentation, CI workflow syntax, application behavior, desktop/mobile presentation, checkpoint, and GitHub synchronization.
-- [ ] Save a managed checkpoint containing the completed README, GitHub Actions workflow, and homepage refinements.
-- [ ] Synchronize the new validated checkpoint to GitHub and confirm the latest source is present on main.
+- [x] Save a managed checkpoint containing the completed README, GitHub Actions workflow, and homepage refinements.
+- [x] Synchronize the new validated checkpoint to GitHub and confirm the latest source is present on main.
+- [x] Resolve the GitHub connector authorization issue, or provide verified manual steps to synchronize the latest release safely.
