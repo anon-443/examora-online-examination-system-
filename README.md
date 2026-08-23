@@ -1,8 +1,8 @@
 # Examora — Online Examination System
 
-Examora is a full-stack online examination platform for focused, timed multiple-choice assessments. It combines a polished React experience with role-based administration, persistent learner records, automated scoring, detailed review, downloadable achievements, and secure server-side AI assistance for assessment authors.
+Examora is a full-stack online examination platform for focused, timed multiple-choice assessments. It combines a polished React experience with role-based administration, persisted learner records, automated scoring, detailed review, downloadable achievements, collaborative cohorts and assignment scheduling, deadline reminders, and secure server-side AI assistance for assessment authors.
 
-> **Project status:** The application is production-oriented and uses Manus OAuth, tRPC, Drizzle ORM, and MySQL/TiDB. The repository includes automated type-checking, tests, builds, and a GitHub Actions quality gate.
+> **Final-release status:** The application uses Manus OAuth, tRPC, Drizzle ORM, and MySQL/TiDB. It is deployed on Manus hosting, with a public GitHub repository, responsive desktop/mobile UI, automated type-checking, regression tests, production builds, and a GitHub Actions quality gate.
 
 ## Contents
 
@@ -15,19 +15,35 @@ Examora is a full-stack online examination platform for focused, timed multiple-
 | [Testing and CI](#testing-and-ci) | Automated checks and GitHub Actions workflow. |
 | [Deployment](#deployment) | Production requirements and environment considerations. |
 
+## Final release links
+
+| Resource | Link | How to use it |
+|---|---|---|
+| Live Examora application | [examora-bm6y24bz.manus.space](https://examora-bm6y24bz.manus.space) | Open this URL to use the deployed full-stack product. |
+| GitHub repository | [anon-443/examora-online-examination-system-](https://github.com/anon-443/examora-online-examination-system-) | View source code, README, Actions, commits, and releases. |
+| GitHub Actions | [CI workflow](https://github.com/anon-443/examora-online-examination-system-/actions) | Review the automated type-check, test, and build results. |
+
+> **GitHub Pages note:** GitHub Pages is designed for static sites. Examora requires an Express server, tRPC API, OAuth, database, scheduled deadline alerts, and server-side AI/PDF capabilities, so the complete live application is hosted at the Manus URL above rather than GitHub Pages.
+
 ## Features
 
 ### Student experience
 
-Students can browse assessments by subject and difficulty, enter a timed MCQ exam room, navigate between questions, flag items for later review, and see a pre-submission summary of unanswered or flagged questions. Answers are retained locally for refresh recovery and saved to the server as selections are made. The runner surfaces the timestamp of the last successful server-confirmed save.
+Students can browse published assessments by subject and difficulty, enter a timed MCQ exam room, navigate between questions, flag items for later review, and see a pre-submission summary of unanswered or flagged questions. Answers are retained locally for refresh recovery and saved to the server as selections are made. The runner surfaces the timestamp of the last successful server-confirmed save, a live progress bar, and a low-time warning.
 
-After submitting, a learner receives automatic scoring, percentage, correct/incorrect totals, and a retained explanation-aware review. Learners can revisit assessment history, track performance trends, bookmark review items, filter leaderboards, download eligible certificates and performance reports, share passing outcomes, and submit private post-exam difficulty feedback.
+After submitting, a learner receives automatic scoring, percentage, correct/incorrect totals, detailed feedback, and a retained explanation-aware review. Learners can revisit assessment history, track performance trends, filter leaderboards, choose an accessible text-size preference, download eligible certificates and performance reports, share passing outcomes, and submit private post-exam difficulty feedback.
+
+### Collaborative learning and practice
+
+Practice Lab includes both a guided warm-up and launches into real persisted assessments. Learners can join instructor cohorts through invite codes, see assignment deadlines, task-status indicators, completion progress, upcoming-exam notifications, and completed outcomes. The daily deadline reminder workflow is idempotent, so qualifying learners are not sent duplicate notifications.
+
+Instructors can create cohorts, publish or schedule assignments, inspect learner-level statuses, review completion rates and trend charts, and download cohort-ready PDF progress reports based on real assignment data.
 
 ### Administration and authoring
 
 Administrators manage assessments, subjects, difficulty levels, questions, explanations, and publication state through protected procedures. The authoring studio can create editable AI-generated MCQ drafts from a topic, target difficulty, quantity, and an administrator-owned PDF context. AI requests, file validation, and storage operations remain server-side.
 
-The analytics dashboard presents completed-attempt volume, average achievement, pass rate, active learners, subject performance, frequently missed questions, private learner feedback, and a CSV export of the aggregated data.
+The analytics dashboard presents completed-attempt volume, average achievement, pass rate, active learners, subject performance, frequently missed questions, private learner feedback, and a CSV export of the aggregated data. Administrators can seed the two published starter assessments, manage question categories and difficulty levels, and activate or review deadline-alert status.
 
 ### Security and integrity
 
@@ -119,9 +135,21 @@ Create tables before dependent foreign keys and treat destructive migrations wit
 
 ## Deployment
 
-Examora is a full-stack service, not a static website. Production hosting needs a Node-compatible runtime, a MySQL/TiDB database, OAuth configuration, the required server-side AI/storage configuration, and HTTPS. GitHub Pages may host a separate static portfolio page but cannot run the Express server, tRPC procedures, authentication flow, database access, or server-side AI/PDF workflows.
+Examora is a full-stack service, not a static website. Production hosting needs a Node-compatible runtime, a MySQL/TiDB database, OAuth configuration, the required server-side AI/storage configuration, scheduled-task support, and HTTPS. GitHub Pages may host a separate static portfolio page but cannot run the Express server, tRPC procedures, authentication flow, database access, scheduled deadline workflow, or server-side AI/PDF workflows.
 
 For the managed project, create a checkpoint and use the project publishing controls. For external hosting, configure the hosting provider’s environment variables and database connection, run the migration process, then smoke-test sign-in, an assessment attempt, result review, admin analytics, and AI/PDF authoring.
+
+### Final deployment checklist
+
+- [x] Public repository description and homepage link point to the final Examora release.
+- [x] Production database schema and starter assessments are available.
+- [x] OAuth, role checks, typed server procedures, and persistent attempts are configured.
+- [x] Timed assessment, automated scoring, result review, feedback, certificates, and reports are available.
+- [x] Cohorts, assignment scheduling, progress analytics, and deadline-alert workflow are active.
+- [x] Desktop and mobile layouts have been visually checked.
+- [x] `pnpm check`, `pnpm test`, and `pnpm build` have passed for the release.
+- [x] GitHub Actions CI runs on pull requests and `main` pushes.
+- [x] Live application is reachable at [examora-bm6y24bz.manus.space](https://examora-bm6y24bz.manus.space).
 
 ## Repository guidance
 
