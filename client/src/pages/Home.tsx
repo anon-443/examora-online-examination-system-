@@ -162,7 +162,7 @@ export default function Home() {
         </section>
 
         <section className="border-y border-slate-200 bg-white/80 py-6 backdrop-blur sm:py-7 dark:border-white/10 dark:bg-slate-900/50">
-          <div className="container grid gap-4 text-center sm:grid-cols-3 sm:text-left">
+          <div className="container grid -translate-y-1 gap-4 text-center sm:grid-cols-3 sm:text-left">
             {[[BookOpenCheck, "Purposeful practice", "Curated, structured assessments"], [Trophy, "Meaningful feedback", "Clear outcome summaries"], [ShieldCheck, "Secure by role", "Student and admin access controls"]].map(([Icon, title, copy]) => {
               const FeatureIcon = Icon as typeof BookOpenCheck;
               return <div key={String(title)} className="flex items-center justify-center gap-3 sm:justify-start"><span className="grid size-9 place-items-center rounded-xl bg-emerald-50 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300"><FeatureIcon className="size-5" /></span><div><p className="text-[15px] font-bold">{String(title)}</p><p className="text-[13px] text-slate-500 dark:text-slate-400">{String(copy)}</p></div></div>;

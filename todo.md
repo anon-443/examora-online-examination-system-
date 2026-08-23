@@ -150,3 +150,5 @@
 - [x] Validate the precise hero-position correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
 - [x] Add a clear Home action to the shared desktop and mobile navigation menus.
 - [x] Validate the return-to-home navigation on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Lift the three-item reassurance strip slightly upward while retaining its current alignment and responsive behavior.
+- [ ] Validate the reassurance-strip position correction on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
