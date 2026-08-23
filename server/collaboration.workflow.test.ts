@@ -12,6 +12,7 @@ const db = vi.hoisted(() => ({
   createCohort: vi.fn(),
   listUserAssignments: vi.fn(),
   listInstructorAssignments: vi.fn(),
+  listInstructorAssignmentProgress: vi.fn(),
   createAssignment: vi.fn(),
   getAssignmentForUser: vi.fn(),
   getExamWithQuestions: vi.fn(),
@@ -47,6 +48,13 @@ describe("collaboration workflows", () => {
 
   it("keeps instructor assignment creation inaccessible to learners", async () => {
     await expect(appRouter.createCaller(context("user")).collaboration.assignments.create({ cohortId: 4, examId: 3, title: "Reasoning check-in", scheduledAt: new Date("2030-01-10T09:00:00.000Z"), status: "published" })).rejects.toMatchObject({ code: "FORBIDDEN" });
+  });
+
+  it("keeps learner-level assignment progress visible only to instructors", async () => {
+    db.listInstructorAssignmentProgress.mockResolvedValue([{ assignmentId: 11, learnerName: "Learner", attemptStatus: "submitted" }]);
+    await expect(appRouter.createCaller(context("admin")).collaboration.assignments.progress()).resolves.toHaveLength(1);
+    await expect(appRouter.createCaller(context("user")).collaboration.assignments.progress()).rejects.toMatchObject({ code: "FORBIDDEN" });
+    expect(db.listInstructorAssignmentProgress).toHaveBeenCalledWith(7);
   });
 
   it("launches a persisted attempt for an available cohort assignment", async () => {

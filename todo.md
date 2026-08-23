@@ -114,5 +114,10 @@
 - [x] Finalize instructor cohort-assignment publishing and scheduling with visible learner access.
 - [x] Activate and verify durable upcoming-exam and deadline notifications without duplicate delivery.
 - [x] Validate the alignment, assessment, publishing, notification, responsive UI, TypeScript, tests, and production build.
-- [ ] Save the validated alignment and collaboration release in a managed checkpoint.
-- [ ] Synchronize the managed alignment and collaboration release to GitHub main and verify the remote revision.
+- [x] Save the validated alignment and collaboration release in a managed checkpoint.
+- [x] Synchronize the managed alignment and collaboration release to GitHub main and verify the remote revision.
+- [x] Lower the complete hero text-and-art composition without changing its corrected horizontal alignment.
+- [x] Add a detailed post-practice result experience with score, feedback, explanations, and clear next actions.
+- [x] Add instructor cohort progress analytics with completion rates and learner-level assignment visibility.
+- [x] Add student dashboard progress bars and status indicators for upcoming deadlines and completed tasks.
+- [ ] Validate the learner-progress release, save a managed checkpoint, and synchronize it to GitHub main.

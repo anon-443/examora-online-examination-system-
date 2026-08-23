@@ -40,6 +40,7 @@ export const collaborationRouter = router({
   assignments: router({
     mine: protectedProcedure.query(({ ctx }) => db.listUserAssignments(ctx.user.id)),
     instructor: adminProcedure.query(({ ctx }) => db.listInstructorAssignments(ctx.user.id)),
+    progress: adminProcedure.query(({ ctx }) => db.listInstructorAssignmentProgress(ctx.user.id)),
     create: adminProcedure.input(assignmentInput).mutation(async ({ ctx, input }) => {
       if (input.dueAt && input.dueAt < input.scheduledAt) throw new TRPCError({ code: "BAD_REQUEST", message: "A due date must occur after the release time." });
       const availableCohorts = await db.listInstructorCohorts(ctx.user.id);

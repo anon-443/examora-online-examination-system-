@@ -580,15 +580,30 @@ export async function listUserAssignments(userId: number) {
 export async function listInstructorAssignments(instructorId: number) {
   const db = await getDb();
   if (!db) return [];
-  return db.select({ id: assignments.id, cohortId: cohorts.id, cohortName: cohorts.name, examId: exams.id, examTitle: exams.title, subject: exams.subject, title: assignments.title, scheduledAt: assignments.scheduledAt, dueAt: assignments.dueAt, status: assignments.status, learnerCount: sql<number>`count(distinct ${cohortMemberships.userId})`, completionCount: sql<number>`count(distinct ${assignmentAttempts.userId})` })
+  return db.select({ id: assignments.id, cohortId: cohorts.id, cohortName: cohorts.name, examId: exams.id, examTitle: exams.title, subject: exams.subject, title: assignments.title, scheduledAt: assignments.scheduledAt, dueAt: assignments.dueAt, status: assignments.status, learnerCount: sql<number>`count(distinct ${cohortMemberships.userId})`, attemptCount: sql<number>`count(distinct ${assignmentAttempts.userId})`, completionCount: sql<number>`count(distinct case when ${examAttempts.status} = 'submitted' then ${assignmentAttempts.userId} end)`, averagePercentage: sql<number | null>`round(avg(case when ${examAttempts.status} = 'submitted' then ${examAttempts.percentage} end))` })
     .from(assignments)
     .innerJoin(cohorts, eq(assignments.cohortId, cohorts.id))
     .innerJoin(exams, eq(assignments.examId, exams.id))
     .leftJoin(cohortMemberships, and(eq(cohortMemberships.cohortId, cohorts.id), eq(cohortMemberships.role, "learner")))
     .leftJoin(assignmentAttempts, eq(assignmentAttempts.assignmentId, assignments.id))
+    .leftJoin(examAttempts, eq(examAttempts.id, assignmentAttempts.attemptId))
     .where(eq(assignments.createdBy, instructorId))
     .groupBy(assignments.id)
     .orderBy(desc(assignments.scheduledAt));
+}
+
+export async function listInstructorAssignmentProgress(instructorId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select({ assignmentId: assignments.id, assignmentTitle: assignments.title, cohortName: cohorts.name, learnerId: users.id, learnerName: users.name, attemptId: assignmentAttempts.attemptId, attemptStatus: examAttempts.status, percentage: examAttempts.percentage, startedAt: examAttempts.startedAt, submittedAt: examAttempts.submittedAt })
+    .from(assignments)
+    .innerJoin(cohorts, eq(assignments.cohortId, cohorts.id))
+    .innerJoin(cohortMemberships, and(eq(cohortMemberships.cohortId, cohorts.id), eq(cohortMemberships.role, "learner")))
+    .innerJoin(users, eq(users.id, cohortMemberships.userId))
+    .leftJoin(assignmentAttempts, and(eq(assignmentAttempts.assignmentId, assignments.id), eq(assignmentAttempts.userId, cohortMemberships.userId)))
+    .leftJoin(examAttempts, eq(examAttempts.id, assignmentAttempts.attemptId))
+    .where(eq(assignments.createdBy, instructorId))
+    .orderBy(desc(assignments.scheduledAt), asc(users.name));
 }
 
 export async function listUpcomingDeadlines(userId: number) {
