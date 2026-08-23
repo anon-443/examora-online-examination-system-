@@ -141,4 +141,4 @@
 - [x] Validate the expanded visual system across desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
 - [x] Keep the catalogue introduction on one desktop line without harming mobile wrapping.
 - [x] Tighten unnecessary desktop vertical gaps around the pathway, catalogue, assessment preview, and leaderboard sections.
-- [ ] Validate the homepage spacing refinement on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
+- [x] Validate the homepage spacing refinement on desktop and mobile, save a managed checkpoint, and synchronize GitHub main.
