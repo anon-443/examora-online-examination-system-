@@ -14,6 +14,7 @@ import Leaderboard from "./pages/Leaderboard";
 import NotFound from "./pages/NotFound";
 import Result from "./pages/Result";
 import Profile from "./pages/Profile";
+import { ExamGuide, PracticeLab, StudyHub } from "./pages/StudySpaces";
 
 function ScrollToTop() { const [location] = useLocation(); return <Route path={location}>{() => { window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); return null; }}</Route>; }
 
@@ -28,6 +29,9 @@ function Router() {
     <Route path="/leaderboard" component={Leaderboard} />
     <Route path="/about" component={About} />
     <Route path="/contact" component={Contact} />
+    <Route path="/study-hub" component={StudyHub} />
+    <Route path="/practice" component={PracticeLab} />
+    <Route path="/exam-guide" component={ExamGuide} />
     <Route path="/admin" component={Admin} />
     <Route path="/admin/analytics" component={AdminAnalytics} />
     <Route path="/404" component={NotFound} />

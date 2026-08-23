@@ -11,4 +11,14 @@ describe("repository documentation and automation", () => {
     expect(workflow).toContain("pnpm test");
     expect(workflow).toContain("pnpm build");
   });
+
+  it("registers advanced study, practice, and exam-readiness destinations", async () => {
+    const app = await readFile(new URL("../client/src/App.tsx", import.meta.url), "utf8");
+    const spaces = await readFile(new URL("../client/src/pages/StudySpaces.tsx", import.meta.url), "utf8");
+    expect(app).toContain('path="/study-hub"');
+    expect(app).toContain('path="/practice"');
+    expect(app).toContain('path="/exam-guide"');
+    expect(spaces).toContain("PracticeLab");
+    expect(spaces).toContain("ExamGuide");
+  });
 });

@@ -17,9 +17,10 @@ import {
 
 const links = [
   { label: "Explore exams", href: "/exams" },
+  { label: "Practice", href: "/practice" },
+  { label: "Study hub", href: "/study-hub" },
   { label: "Leaderboard", href: "/leaderboard" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export function Brand() {
@@ -50,7 +51,7 @@ export function SiteHeader() {
     <header className={`sticky top-0 z-50 border-b border-slate-200/70 bg-[hsl(var(--page)/0.82)] backdrop-blur-xl transition-shadow dark:border-white/10 ${scrolled ? "shadow-[0_2px_12px_rgba(0,0,0,0.06)]" : ""}`}>
       <div className="container flex h-[76px] items-center justify-between gap-4">
         <Brand />
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary navigation">
           {links.map(link => (
             <Link
               key={link.href}
@@ -61,7 +62,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           <ThemeToggle />
           {loading ? <div className="h-9 w-24 animate-pulse rounded-full bg-slate-100 dark:bg-white/10" /> : user ? (
             <DropdownMenu>

@@ -72,3 +72,9 @@
 - [x] Save a managed checkpoint containing the completed README, GitHub Actions workflow, and homepage refinements.
 - [x] Synchronize the new validated checkpoint to GitHub and confirm the latest source is present on main.
 - [x] Resolve the GitHub connector authorization issue, or provide verified manual steps to synchronize the latest release safely.
+- [x] Repair the hero-card overlay collision and verify it remains stable across responsive breakpoints.
+- [x] Elevate the visual system with richer interactive content blocks, micro-interactions, and stronger visual hierarchy.
+- [x] Add practical new destination pages and navigation actions that extend the student product experience.
+- [x] Validate the advanced visual release with automated tests, desktop/mobile screenshots, managed checkpoint, and GitHub synchronization.
+- [ ] Save the advanced visual and product-experience upgrade in a managed checkpoint.
+- [ ] Synchronize the advanced visual release to GitHub main and verify the update remotely.
