@@ -114,3 +114,41 @@ export function updateGeneratedDraftOption<T extends EditableGeneratedDraft>(dra
     return { ...draft, options } as T;
   });
 }
+
+export type ExamRecoverySnapshot = {
+  answers: Record<number, number>;
+  bookmarkedQuestionIds: number[];
+  activeIndex: number;
+  savedAt: number;
+};
+
+export function normalizeExamRecovery(snapshot: Partial<ExamRecoverySnapshot> | null | undefined, questionIds: number[]): ExamRecoverySnapshot {
+  const allowed = new Set(questionIds);
+  const answers = Object.fromEntries(Object.entries(snapshot?.answers ?? {}).filter(([questionId, option]) => allowed.has(Number(questionId)) && Number.isInteger(option) && option >= 0 && option <= 3).map(([questionId, option]) => [Number(questionId), option]));
+  const bookmarkedQuestionIds = Array.from(new Set((snapshot?.bookmarkedQuestionIds ?? []).filter(questionId => allowed.has(questionId))));
+  const requestedIndex = typeof snapshot?.activeIndex === "number" && Number.isInteger(snapshot.activeIndex) ? snapshot.activeIndex : 0;
+  const activeIndex = Math.min(Math.max(0, requestedIndex), Math.max(0, questionIds.length - 1));
+  return { answers, bookmarkedQuestionIds, activeIndex, savedAt: typeof snapshot?.savedAt === "number" ? snapshot.savedAt : 0 };
+}
+
+export type AnalyticsAttempt = { userId: number; percentage: number; subject: string };
+export type AnalyticsAnswer = { questionId: number; prompt: string | null; subject: string; isCorrect: boolean };
+
+export function buildAdminAnalytics(attempts: AnalyticsAttempt[], answers: AnalyticsAnswer[]) {
+  const completedAttempts = attempts.length;
+  const averagePercentage = completedAttempts ? Math.round(attempts.reduce((total, attempt) => total + attempt.percentage, 0) / completedAttempts) : 0;
+  const passRate = completedAttempts ? Math.round((attempts.filter(attempt => attempt.percentage >= 65).length / completedAttempts) * 100) : 0;
+  const subjectMap = new Map<string, { total: number; averageTotal: number }>();
+  attempts.forEach(attempt => { const current = subjectMap.get(attempt.subject) ?? { total: 0, averageTotal: 0 }; current.total += 1; current.averageTotal += attempt.percentage; subjectMap.set(attempt.subject, current); });
+  const questionMap = new Map<number, { questionId: number; prompt: string; subject: string; totalResponses: number; missedCount: number }>();
+  answers.forEach(answer => { const current = questionMap.get(answer.questionId) ?? { questionId: answer.questionId, prompt: answer.prompt || "Question detail unavailable", subject: answer.subject, totalResponses: 0, missedCount: 0 }; current.totalResponses += 1; if (!answer.isCorrect) current.missedCount += 1; questionMap.set(answer.questionId, current); });
+  return {
+    summary: { completedAttempts, averagePercentage, passRate, activeStudents: new Set(attempts.map(attempt => attempt.userId)).size },
+    subjectPerformance: Array.from(subjectMap.entries()).map(([subject, value]) => ({ subject, attempts: value.total, averagePercentage: Math.round(value.averageTotal / value.total) })).sort((a, b) => b.averagePercentage - a.averagePercentage),
+    mostMissedQuestions: Array.from(questionMap.values()).map(question => ({ ...question, missRate: Math.round((question.missedCount / question.totalResponses) * 100) })).sort((a, b) => b.missedCount - a.missedCount || b.missRate - a.missRate).slice(0, 8),
+  };
+}
+
+export function isOwnedPdfContextKey(contextKey: string, userId: number) {
+  return contextKey.startsWith(`exam-context/${userId}/`);
+}

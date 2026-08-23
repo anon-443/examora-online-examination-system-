@@ -9,6 +9,7 @@ import {
   users,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
+import { buildAdminAnalytics } from "../shared/examEnhancements";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -393,4 +394,21 @@ export async function listParticipation() {
     .innerJoin(users, eq(examAttempts.userId, users.id))
     .innerJoin(exams, eq(examAttempts.examId, exams.id))
     .orderBy(desc(examAttempts.startedAt));
+}
+
+export async function getAdminAnalytics() {
+  const db = await getDb();
+  if (!db) return buildAdminAnalytics([], []);
+  const attempts = await db
+    .select({ userId: examAttempts.userId, percentage: examAttempts.percentage, subject: exams.subject })
+    .from(examAttempts)
+    .innerJoin(exams, eq(examAttempts.examId, exams.id))
+    .where(eq(examAttempts.status, "submitted"));
+  const answers = await db
+    .select({ questionId: attemptAnswers.questionId, prompt: attemptAnswers.questionPromptSnapshot, subject: exams.subject, isCorrect: attemptAnswers.isCorrect })
+    .from(attemptAnswers)
+    .innerJoin(examAttempts, eq(attemptAnswers.attemptId, examAttempts.id))
+    .innerJoin(exams, eq(examAttempts.examId, exams.id))
+    .where(eq(examAttempts.status, "submitted"));
+  return buildAdminAnalytics(attempts, answers.map(answer => ({ ...answer, isCorrect: Boolean(answer.isCorrect) })));
 }

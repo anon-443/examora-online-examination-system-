@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { achievementShareCopy, achievementShareUrls, buildPerformanceTrend, buildSubmissionReview, filterCategorizedExams, filterLeaderboardRows, isGenerationCountValid, isLowTime, toggleQuestionBookmark, updateGeneratedDraft, updateGeneratedDraftOption } from "../shared/examEnhancements";
+import { achievementShareCopy, achievementShareUrls, buildAdminAnalytics, buildPerformanceTrend, buildSubmissionReview, filterCategorizedExams, filterLeaderboardRows, isGenerationCountValid, isLowTime, isOwnedPdfContextKey, normalizeExamRecovery, toggleQuestionBookmark, updateGeneratedDraft, updateGeneratedDraftOption } from "../shared/examEnhancements";
 
 const exams = [
   { subject: "Science", difficulty: "Beginner" as const, id: 1 },
@@ -70,5 +70,20 @@ describe("exam enhancement helpers", () => {
     const revised = updateGeneratedDraft(drafts, 0, { prompt: "Revised prompt", correctOption: 2, explanation: "Revised explanation" });
     const revisedOptions = updateGeneratedDraftOption(revised, 0, 1, "Revised B");
     expect(revisedOptions[0]).toEqual({ prompt: "Revised prompt", options: ["A", "Revised B", "C", "D"], correctOption: 2, explanation: "Revised explanation" });
+  });
+
+  it("restores only valid saved answers, bookmarks, and navigation after a refresh", () => {
+    expect(normalizeExamRecovery({ answers: { 1: 2, 9: 1, 2: 4 }, bookmarkedQuestionIds: [2, 8, 2], activeIndex: 9, savedAt: 123 }, [1, 2, 3])).toEqual({ answers: { 1: 2 }, bookmarkedQuestionIds: [2], activeIndex: 2, savedAt: 123 });
+  });
+
+  it("aggregates administrator performance and frequently missed question insights", () => {
+    const analytics = buildAdminAnalytics([{ userId: 1, percentage: 80, subject: "Science" }, { userId: 2, percentage: 50, subject: "Science" }, { userId: 1, percentage: 90, subject: "Math" }], [{ questionId: 10, prompt: "Cell structure", subject: "Science", isCorrect: false }, { questionId: 10, prompt: "Cell structure", subject: "Science", isCorrect: true }, { questionId: 11, prompt: "Fractions", subject: "Math", isCorrect: false }]);
+    expect(analytics.summary).toEqual({ completedAttempts: 3, averagePercentage: 73, passRate: 67, activeStudents: 2 });
+    expect(analytics.mostMissedQuestions[0]).toMatchObject({ questionId: 11, missedCount: 1, missRate: 100 });
+  });
+
+  it("allows PDF context only from the administrator-scoped storage prefix", () => {
+    expect(isOwnedPdfContextKey("exam-context/7/syllabus.pdf", 7)).toBe(true);
+    expect(isOwnedPdfContextKey("exam-context/8/syllabus.pdf", 7)).toBe(false);
   });
 });

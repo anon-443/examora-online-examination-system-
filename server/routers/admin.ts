@@ -3,6 +3,8 @@ import { TRPCError } from "@trpc/server";
 import * as db from "../db";
 import { invokeLLM } from "../_core/llm";
 import { adminProcedure, router } from "../_core/trpc";
+import { storageGetSignedUrl, storagePut } from "../storage";
+import { isOwnedPdfContextKey } from "../../shared/examEnhancements";
 
 const examInput = z.object({
   title: z.string().trim().min(3).max(180),
@@ -29,11 +31,13 @@ const aiQuestionInput = z.object({
   topic: z.string().trim().min(3).max(180),
   difficulty: z.enum(["Beginner", "Intermediate", "Advanced"]),
   count: z.number().int().min(1).max(8),
+  contextKey: z.string().trim().min(1).max(320).optional(),
 });
 
 export const adminRouter = router({
   exams: adminProcedure.query(() => db.listAdminExams()),
   participation: adminProcedure.query(() => db.listParticipation()),
+  analytics: adminProcedure.query(() => db.getAdminAnalytics()),
   examDetails: adminProcedure
     .input(z.object({ examId: z.number().int().positive() }))
     .query(({ input }) => db.getExamWithQuestions(input.examId)),
@@ -51,10 +55,23 @@ export const adminRouter = router({
   deleteQuestion: adminProcedure
     .input(z.object({ questionId: z.number().int().positive() }))
     .mutation(({ input }) => db.deleteQuestion(input.questionId)),
-  generateQuestions: adminProcedure.input(aiQuestionInput).mutation(async ({ input }) => {
+  uploadQuestionContext: adminProcedure.input(z.object({ fileName: z.string().trim().min(1).max(180), mimeType: z.literal("application/pdf"), base64: z.string().min(20).max(7_000_000) })).mutation(async ({ input, ctx }) => {
+    const buffer = Buffer.from(input.base64.replace(/^data:application\/pdf;base64,/, ""), "base64");
+    if (!buffer.subarray(0, 4).equals(Buffer.from("%PDF"))) throw new TRPCError({ code: "BAD_REQUEST", message: "Upload a valid PDF document." });
+    if (buffer.byteLength > 5 * 1024 * 1024) throw new TRPCError({ code: "PAYLOAD_TOO_LARGE", message: "The PDF must be 5 MB or smaller." });
+    const safeName = input.fileName.replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^[-.]+|[-.]+$/g, "") || "source.pdf";
+    const stored = await storagePut(`exam-context/${ctx.user.id}/${safeName.endsWith(".pdf") ? safeName : `${safeName}.pdf`}`, buffer, "application/pdf");
+    return { ...stored, fileName: safeName, bytes: buffer.byteLength };
+  }),
+  generateQuestions: adminProcedure.input(aiQuestionInput).mutation(async ({ input, ctx }) => {
+    let documentContext: { type: "file_url"; file_url: { url: string; mime_type: "application/pdf" } } | null = null;
+    if (input.contextKey) {
+      if (!isOwnedPdfContextKey(input.contextKey, ctx.user.id)) throw new TRPCError({ code: "FORBIDDEN", message: "This PDF context is not available to your account." });
+      documentContext = { type: "file_url", file_url: { url: await storageGetSignedUrl(input.contextKey), mime_type: "application/pdf" } };
+    }
     const response = await invokeLLM({
-      model: "gpt-5-mini",
-      maxTokens: 3800,
+      model: documentContext ? "gemini-3-flash-preview" : "gpt-5-mini",
+      maxTokens: documentContext ? 5000 : 3800,
       messages: [
         {
           role: "system",
@@ -62,7 +79,7 @@ export const adminRouter = router({
         },
         {
           role: "user",
-          content: `Create ${input.count} ${input.difficulty.toLowerCase()} multiple-choice questions about: ${input.topic}. Questions must be appropriate for a general educational assessment.`,
+          content: documentContext ? [{ type: "text", text: `Create ${input.count} ${input.difficulty.toLowerCase()} multiple-choice questions about: ${input.topic}. Use the attached PDF only as learning context. Do not reproduce long passages or mention the source document. Questions must be appropriate for a general educational assessment.` }, documentContext] : `Create ${input.count} ${input.difficulty.toLowerCase()} multiple-choice questions about: ${input.topic}. Questions must be appropriate for a general educational assessment.`,
         },
       ],
       response_format: {

@@ -6,6 +6,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import ExamCatalog from "./pages/ExamCatalog";
 import ExamRunner from "./pages/ExamRunner";
 import Admin from "./pages/Admin";
+import AdminAnalytics from "./pages/AdminAnalytics";
 import History from "./pages/History";
 import Home from "./pages/Home";
 import { About, Contact } from "./pages/InfoPages";
@@ -28,6 +29,7 @@ function Router() {
     <Route path="/about" component={About} />
     <Route path="/contact" component={Contact} />
     <Route path="/admin" component={Admin} />
+    <Route path="/admin/analytics" component={AdminAnalytics} />
     <Route path="/404" component={NotFound} />
     <Route component={NotFound} />
   </Switch>;
