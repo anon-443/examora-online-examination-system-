@@ -149,7 +149,7 @@ export default function Home() {
               <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-slate-900 shadow-[0_30px_100px_-25px_rgba(15,23,42,0.45)] dark:border-white/10">
                 <img src="/manus-storage/examora-hero-illustration_a0ceefab.png" alt="Students completing a digital assessment" className="aspect-[16/10] w-full object-cover" />
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent px-5 pb-5 pt-24 text-white sm:px-7 sm:pb-7">
-                  <div className="max-w-[78%]"><p className="text-xs font-bold uppercase tracking-[0.1em] text-emerald-300">Examora space</p><p className="mt-1 font-display text-lg font-semibold tracking-[-0.04em] sm:text-xl">A quiet place to show what you know</p></div>
+                  <div className="max-w-[78%]"><p className="text-xs font-bold uppercase tracking-[0.1em] text-emerald-300">Examora space</p></div>
                   <span className="hidden size-11 shrink-0 place-items-center rounded-full border border-white/20 bg-white/10 backdrop-blur sm:grid"><Play className="ml-0.5 size-4 fill-current" /></span>
                 </div>
               </div>
