@@ -121,3 +121,8 @@
 - [x] Add instructor cohort progress analytics with completion rates and learner-level assignment visibility.
 - [x] Add student dashboard progress bars and status indicators for upcoming deadlines and completed tasks.
 - [x] Validate the learner-progress release, save a managed checkpoint, and synchronize it to GitHub main.
+- [x] Remove the comma from the hero label and lower the full hero composition further while preserving alignment.
+- [x] Increase small-text readability across shared navigation, labels, cards, controls, and primary learner views.
+- [x] Add restrained academic visual accents that strengthen hierarchy without adding clutter or motion burden.
+- [x] Extend restrained visual accents into shared learner and instructor surfaces, then revalidate desktop and mobile hierarchy.
+- [ ] Validate the visual readability refinement across responsive key screens, save a managed checkpoint, and synchronize GitHub main.

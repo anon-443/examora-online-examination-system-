@@ -109,7 +109,7 @@ export default function Home() {
           <div className="hero-orb hero-orb-one" />
           <div className="hero-orb hero-orb-two" />
           <div className="hero-grid" />
-          <div className="container relative grid min-h-[455px] translate-y-3 items-center gap-7 py-5 sm:translate-y-4 sm:gap-10 sm:py-8 lg:translate-y-5 lg:grid-cols-[0.92fr_1.08fr] lg:py-6">
+          <div className="container relative grid min-h-[455px] translate-y-5 items-center gap-7 py-5 sm:translate-y-7 sm:gap-10 sm:py-8 lg:translate-y-9 lg:grid-cols-[0.92fr_1.08fr] lg:py-6">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -118,7 +118,7 @@ export default function Home() {
             >
               <motion.div variants={reveal}>
                 <Badge className="rounded-full border-0 bg-emerald-100 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-emerald-800 dark:bg-emerald-400/15 dark:text-emerald-300">
-                  <Sparkles className="mr-1.5 size-3" />Assessment, considered
+                  <Sparkles className="mr-1.5 size-3" />Assessment considered
                 </Badge>
               </motion.div>
               <motion.h1 variants={reveal} className="mt-5 font-display text-[clamp(3rem,5vw,4.65rem)] font-semibold leading-[0.95] tracking-[-0.065em] text-slate-950 dark:text-white">
@@ -155,6 +155,7 @@ export default function Home() {
               <div className="absolute left-4 top-4 hidden w-fit rounded-2xl border border-white/80 bg-white/95 p-3.5 shadow-[0_18px_36px_-18px_rgba(15,23,42,0.45)] backdrop-blur md:block dark:border-white/10 dark:bg-slate-900/95">
                 <div className="flex items-center gap-3"><span className="grid size-8 place-items-center rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-400/15 dark:text-amber-300"><Clock3 className="size-4" /></span><div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Focus mode</p><p className="text-[15px] font-bold text-slate-800 dark:text-white">Every minute matters</p></div></div>
               </div>
+              <div aria-hidden="true" className="absolute bottom-5 right-20 hidden items-center gap-2 rounded-full border border-white/20 bg-slate-950/35 px-3 py-2 text-[11px] font-bold tracking-wide text-white/90 backdrop-blur lg:flex"><span className="flex gap-1"><i className="size-1.5 rounded-full bg-emerald-300" /><i className="size-1.5 rounded-full bg-cyan-200" /><i className="size-1.5 rounded-full bg-violet-200" /></span>Ready when you are</div>
             </motion.div>
           </div>
         </section>
