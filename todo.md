@@ -130,4 +130,4 @@
 - [x] Add a persistent learner-selectable text-size preference with accessible default, comfortable, and large options.
 - [x] Add instructor cohort completion trend analytics derived from real assignment and learner progress records.
 - [x] Generate downloadable instructor-ready PDF cohort progress reports from real assignment analytics.
-- [ ] Validate accessibility, reporting, analytics, responsive UI, save a managed checkpoint, and synchronize GitHub main.
+- [x] Validate accessibility, reporting, analytics, responsive UI, save a managed checkpoint, and synchronize GitHub main.
