@@ -1,6 +1,7 @@
 {
   "name": "online-examination-system",
   "version": "1.0.0",
+  "description": "Examora is a full-stack, role-secured online examination platform with timed MCQs, automated results, learner history, analytics, and AI-assisted assessment authoring.",
   "type": "module",
   "license": "MIT",
   "scripts": {

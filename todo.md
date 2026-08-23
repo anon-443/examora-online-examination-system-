@@ -62,5 +62,12 @@
 - [x] Restore the final-release CSV export, auto-save timestamp, post-exam feedback, and analytics feedback-review features after the managed reset.
 - [x] Revalidate the restored release and save it using the managed checkpoint workflow before GitHub handoff.
 - [x] Deliver the final release handoff with the new checkpoint and GitHub/domain status.
-- [ ] Save the accurate post-upload handoff documentation and completed delivery record in the managed release checkpoint.
-- [ ] Deliver the verified final project, reusable skill, preview, and GitHub/domain status to the user.
+- [x] Save the accurate post-upload handoff documentation and completed delivery record in the managed release checkpoint.
+- [x] Deliver the verified final project, reusable skill, preview, and GitHub/domain status to the user.
+- [x] Audit the current homepage and repository metadata against the supplied completion brief.
+- [x] Write a comprehensive README with project description, setup, architecture, security, feature, test, deployment, and contribution guidance.
+- [x] Add GitHub Actions CI to install dependencies, type-check, test, and build on pull requests and main-branch pushes.
+- [x] Complete and refine the public homepage with the requested learning path, subject catalogue, exam preview, leaderboard, outcome proof, and layout corrections.
+- [x] Validate documentation, CI workflow syntax, application behavior, desktop/mobile presentation, checkpoint, and GitHub synchronization.
+- [ ] Save a managed checkpoint containing the completed README, GitHub Actions workflow, and homepage refinements.
+- [ ] Synchronize the new validated checkpoint to GitHub and confirm the latest source is present on main.

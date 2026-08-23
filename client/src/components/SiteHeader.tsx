@@ -2,7 +2,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { startLogin } from "@/const";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, LayoutDashboard, Menu, ShieldCheck, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ThemeToggle } from "./ThemeToggle";
 import { Avatar, AvatarFallback } from "./ui/avatar";
@@ -36,10 +36,18 @@ export function Brand() {
 export function SiteHeader() {
   const { user, loading, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
 
+  useEffect(() => {
+    const updateShadow = () => setScrolled(window.scrollY > 6);
+    updateShadow();
+    window.addEventListener("scroll", updateShadow, { passive: true });
+    return () => window.removeEventListener("scroll", updateShadow);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-[hsl(var(--page)/0.82)] backdrop-blur-xl dark:border-white/10">
+    <header className={`sticky top-0 z-50 border-b border-slate-200/70 bg-[hsl(var(--page)/0.82)] backdrop-blur-xl transition-shadow dark:border-white/10 ${scrolled ? "shadow-[0_2px_12px_rgba(0,0,0,0.06)]" : ""}`}>
       <div className="container flex h-[76px] items-center justify-between gap-4">
         <Brand />
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
@@ -75,11 +83,7 @@ export function SiteHeader() {
                 <DropdownMenuItem onClick={logout} className="cursor-pointer rounded-lg text-red-600 focus:text-red-600">Sign out</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          ) : (
-            <Button onClick={() => startLogin()} className="rounded-full bg-slate-950 px-4 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100">
-              Sign in <ArrowRight className="ml-1 size-4" />
-            </Button>
-          )}
+          ) : <><Button onClick={() => startLogin()} variant="outline" className="rounded-full border-emerald-300 px-4 text-sm font-semibold text-emerald-800 hover:bg-emerald-50 dark:border-emerald-400/40 dark:text-emerald-300 dark:hover:bg-emerald-400/10">Sign up free</Button><Button onClick={() => startLogin()} className="rounded-full bg-slate-950 px-4 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100">Sign in <ArrowRight className="ml-1 size-4" /></Button></>}
         </div>
         <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle />
@@ -98,7 +102,7 @@ export function SiteHeader() {
                 <Link href="/history" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">My activity</Link>
                 {user.role === "admin" ? <Link href="/admin" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10">Administration</Link> : null}
                 <button onClick={logout} className="rounded-xl px-4 py-3 text-left text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10">Sign out</button>
-              </> : <Button onClick={() => startLogin()} className="mt-2 rounded-xl bg-slate-950 text-white dark:bg-white dark:text-slate-950">Sign in to Examora</Button>}
+              </> : <div className="mt-2 grid gap-2"><Button onClick={() => startLogin()} variant="outline" className="rounded-xl border-emerald-300 text-emerald-800 dark:border-emerald-400/40 dark:text-emerald-300">Sign up free</Button><Button onClick={() => startLogin()} className="rounded-xl bg-slate-950 text-white dark:bg-white dark:text-slate-950">Sign in to Examora</Button></div>}
             </nav>
           </motion.div>
         ) : null}

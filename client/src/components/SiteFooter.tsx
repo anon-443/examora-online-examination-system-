@@ -3,36 +3,5 @@ import { Link } from "wouter";
 import { Brand } from "./SiteHeader";
 
 export function SiteFooter() {
-  return (
-    <footer className="border-t border-slate-200 bg-slate-50/70 dark:border-white/10 dark:bg-slate-950/60">
-      <div className="container py-12 sm:py-16">
-        <div className="grid gap-10 md:grid-cols-[1.35fr_0.65fr_0.65fr]">
-          <div>
-            <Brand />
-            <p className="mt-5 max-w-sm text-sm leading-6 text-slate-600 dark:text-slate-400">A calmer, clearer way to discover skills, complete assessments, and understand your progress.</p>
-          </div>
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.17em] text-slate-400">Explore</p>
-            <div className="mt-4 flex flex-col gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
-              <Link href="/exams" className="hover:text-emerald-600 dark:hover:text-emerald-300">Assessment catalogue</Link>
-              <Link href="/leaderboard" className="hover:text-emerald-600 dark:hover:text-emerald-300">Leaderboard</Link>
-              <Link href="/history" className="hover:text-emerald-600 dark:hover:text-emerald-300">My activity</Link>
-            </div>
-          </div>
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.17em] text-slate-400">Company</p>
-            <div className="mt-4 flex flex-col gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
-              <Link href="/about" className="hover:text-emerald-600 dark:hover:text-emerald-300">About Examora</Link>
-              <Link href="/contact" className="inline-flex items-center gap-1 hover:text-emerald-600 dark:hover:text-emerald-300">Contact <ArrowUpRight className="size-3.5" /></Link>
-              <span className="inline-flex items-center gap-2 text-slate-500"><ShieldCheck className="size-4 text-emerald-600" />Secure, role-based access</span>
-            </div>
-          </div>
-        </div>
-        <div className="mt-12 flex flex-col gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:border-white/10">
-          <span>© {new Date().getFullYear()} Examora. Crafted for focused learning.</span>
-          <span className="inline-flex items-center gap-1">Made with <Heart className="size-3 fill-current text-rose-500" /> for better assessment experiences</span>
-        </div>
-      </div>
-    </footer>
-  );
+  return <footer className="border-t border-slate-200 bg-slate-50/70 dark:border-white/10 dark:bg-slate-950/60"><div className="container py-14"><div className="grid gap-10 md:grid-cols-[1.35fr_0.65fr_0.65fr_0.65fr]"><div><Brand /><p className="mt-5 max-w-sm text-sm leading-6 text-slate-500 dark:text-slate-400">A calmer, clearer way to discover skills, complete assessments, and understand your progress.</p></div><div><p className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-400">Explore</p><div className="mt-4 flex flex-col gap-3 text-sm font-medium text-slate-600 dark:text-slate-400"><Link href="/exams" className="hover:text-emerald-600 dark:hover:text-emerald-300">Assessment catalogue</Link><Link href="/leaderboard" className="hover:text-emerald-600 dark:hover:text-emerald-300">Leaderboard</Link><Link href="/history" className="hover:text-emerald-600 dark:hover:text-emerald-300">My activity</Link></div></div><div><p className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-400">Company</p><div className="mt-4 flex flex-col gap-3 text-sm font-medium text-slate-600 dark:text-slate-400"><Link href="/about" className="hover:text-emerald-600 dark:hover:text-emerald-300">About Examora</Link><Link href="/contact" className="inline-flex items-center gap-1 hover:text-emerald-600 dark:hover:text-emerald-300">Contact <ArrowUpRight className="size-3.5" /></Link><span className="inline-flex items-center gap-2 text-slate-500"><ShieldCheck className="size-4 text-emerald-600" />Secure, role-based access</span></div></div><div><p className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-400">Students</p><div className="mt-4 flex flex-col gap-3 text-sm font-medium text-slate-600 dark:text-slate-400"><Link href="/profile" className="hover:text-emerald-600 dark:hover:text-emerald-300">Sign in</Link><Link href="/exams" className="hover:text-emerald-600 dark:hover:text-emerald-300">Create account</Link><Link href="/leaderboard" className="hover:text-emerald-600 dark:hover:text-emerald-300">View leaderboard</Link><Link href="/history" className="hover:text-emerald-600 dark:hover:text-emerald-300">My results</Link></div></div></div><div className="mt-12 flex flex-col gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:border-white/10"><span>© {new Date().getFullYear()} Examora. Crafted for focused learning.</span><span className="inline-flex items-center gap-1">Made with <Heart className="size-3 fill-current text-rose-500" /> for better assessment experiences</span></div></div></footer>;
 }
