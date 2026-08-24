@@ -19,3 +19,5 @@
 - [x] Validate the compact page layouts and quality checks.
 - [x] Revalidate the final compact homepage, Study Hub, leaderboard, About, and footer layouts at a mobile viewport.
 - [x] Review the full-page mobile About capture and record the footer clipping, overflow, and spacing outcome: passed with no clipping or horizontal overflow and compact spacing.
+- [x] Reduce vertical whitespace in the live assessment runner so the question, answers, timer, and progress controls fit earlier in the initial desktop view.
+- [x] Validate the compact assessment-runner layout on desktop and mobile and run quality checks.
