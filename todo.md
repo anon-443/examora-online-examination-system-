@@ -163,3 +163,5 @@
 - [x] Prepare a professional LinkedIn launch post with practical screenshot/video guidance for Examora.
 - [x] Replace the latest public repository commit with a concise professional final-release message while preserving source code.
 - [x] Investigate the failed GitHub Actions status on the latest public commit and fix it if a repository configuration change is needed.
+- [x] Create a concise professional Examora product-demo video for LinkedIn sharing.
+- [x] Capture key live Examora pages and assemble a concise screen-capture walkthrough that demonstrates working learner and admin flows.
