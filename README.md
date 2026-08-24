@@ -2,7 +2,7 @@
 
 Examora is a full-stack online examination platform for focused, timed multiple-choice assessments. It combines a polished React experience with role-based administration, persisted learner records, automated scoring, detailed review, downloadable achievements, collaborative cohorts and assignment scheduling, deadline reminders, and secure server-side AI assistance for assessment authors.
 
-> **Final-release status:** The application uses Manus OAuth, tRPC, Drizzle ORM, and MySQL/TiDB. It is deployed on Manus hosting, with a public GitHub repository, responsive desktop/mobile UI, automated type-checking, regression tests, production builds, and a GitHub Actions quality gate.
+> **Final-release status:** The application uses Manus OAuth, tRPC, Drizzle ORM, and MySQL/TiDB. It is deployed on Manus hosting, with a public GitHub repository, responsive desktop/mobile UI, 46 automated regression tests, production builds, and a passing GitHub Actions quality gate.
 
 ## Contents
 
