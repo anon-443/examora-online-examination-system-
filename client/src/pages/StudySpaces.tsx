@@ -74,35 +74,33 @@ export function StudyHub() {
   return (
     <div className="min-h-screen bg-[hsl(var(--page))]">
       <SiteHeader />
-      <main className="container py-6 sm:py-7">
-        <section className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-7 py-5 text-white sm:px-9 sm:py-6">
+      <main className="container py-4 sm:py-5">
+        <section className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-7 py-4 text-white sm:px-8 sm:py-5">
           <div className="absolute -right-20 -top-20 size-72 rounded-full bg-emerald-400/20 blur-3xl" />
           <Badge className="relative border-0 bg-emerald-400/15 text-emerald-200"><Sparkles className="mr-1.5 size-3" />Study hub</Badge>
-          <h1 className="relative mt-3 max-w-3xl font-display text-3xl font-semibold tracking-[-0.055em] sm:text-4xl">A more deliberate way to prepare.</h1>
-          <p className="relative mt-3 max-w-3xl text-sm leading-6 text-slate-300">Choose a focus, make a short plan, and move into a timed practice experience when you are ready.</p>
-          <Button asChild className="relative mt-5 min-h-10 rounded-xl bg-emerald-400 font-bold text-slate-950 hover:bg-emerald-300"><Link href="/practice">Start a practice sprint <ArrowRight className="ml-1.5 size-4" /></Link></Button>
+          <h1 className="relative mt-2 max-w-3xl font-display text-2xl font-semibold tracking-[-0.05em] sm:text-3xl">A more deliberate way to prepare.</h1>
+          <p className="relative mt-2 max-w-3xl text-sm leading-6 text-slate-300">Choose a focus, make a short plan, and move into a timed practice experience when you are ready.</p>
+          <Button asChild className="relative mt-4 min-h-10 rounded-xl bg-emerald-400 font-bold text-slate-950 hover:bg-emerald-300"><Link href="/practice">Start a practice sprint <ArrowRight className="ml-1.5 size-4" /></Link></Button>
         </section>
 
-        <section className="mt-6 grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
-          <aside className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900">
+        <section className="mt-4 grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
+          <aside className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-slate-900">
             <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-emerald-700 dark:text-emerald-400">Choose a focus</p>
             <div className="mt-4 grid gap-2">
               {focusAreas.map((area) => (
-                <button key={area} onClick={() => setActive(area)} className={`flex items-center justify-between rounded-xl px-4 py-3 text-left text-sm font-semibold transition-colors ${active === area ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20" : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10"}`}>
+                <button key={area} onClick={() => setActive(area)} className={`flex min-h-10 items-center justify-between rounded-xl px-4 py-2 text-left text-sm font-semibold transition-colors ${active === area ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20" : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10"}`}>
                   {area}<ArrowRight className="size-4" />
                 </button>
               ))}
             </div>
-            <div className="mt-6 rounded-xl bg-slate-50 p-4 dark:bg-white/[0.04]"><Gauge className="size-5 text-emerald-600" /><p className="mt-3 text-sm font-bold text-slate-900 dark:text-white">Stay specific.</p><p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">One intent per session creates a clearer review later.</p></div>
           </aside>
           <AnimatePresence mode="wait">
-            <motion.article key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-white/10 dark:bg-slate-900">
-              <span className="grid size-11 place-items-center rounded-xl bg-emerald-50 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300"><Brain className="size-5" /></span>
-              <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.1em] text-emerald-700 dark:text-emerald-400">{active}</p>
+            <motion.article key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 dark:border-white/10 dark:bg-slate-900">
+              <span className="grid size-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300"><Brain className="size-5" /></span>
+              <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.1em] text-emerald-700 dark:text-emerald-400">{active}</p>
               <h2 className="mt-2 font-display text-3xl font-semibold tracking-[-0.05em] text-slate-950 dark:text-white">{detail.title}</h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">{detail.description}</p>
-              <div className="mt-7 grid gap-3 sm:grid-cols-3">{detail.steps.map((step, index) => <div key={step} className="rounded-xl border border-slate-200 p-4 dark:border-white/10"><span className="text-xs font-bold text-emerald-700 dark:text-emerald-300">0{index + 1}</span><p className="mt-3 text-sm font-semibold text-slate-800 dark:text-slate-100">{step}</p></div>)}</div>
-              <Button asChild className="mt-7 rounded-xl bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950"><Link href="/exams">Find a matching assessment <ArrowRight className="ml-1.5 size-4" /></Link></Button>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">{detail.description}</p>
+              <Button asChild className="mt-5 min-h-10 rounded-xl bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950"><Link href="/exams">Find a matching assessment <ArrowRight className="ml-1.5 size-4" /></Link></Button>
             </motion.article>
           </AnimatePresence>
         </section>

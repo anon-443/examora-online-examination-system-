@@ -13,3 +13,9 @@
 - [x] Further reduce and align the leaderboard dark hero so ranking controls appear higher in the initial view.
 - [x] Validate the revised first-screen views and quality checks.
 - [x] Remove the remaining homepage hero artwork overlay card so the illustration is fully unobstructed.
+- [x] Add a high-contrast “Assessment ready” status badge inside the homepage illustration.
+- [x] Further compact Study Hub and leaderboard panels so more working content fits in the first desktop view.
+- [x] Reduce About-page and footer spacing so the footer begins earlier and remains more compact.
+- [x] Validate the compact page layouts and quality checks.
+- [x] Revalidate the final compact homepage, Study Hub, leaderboard, About, and footer layouts at a mobile viewport.
+- [x] Review the full-page mobile About capture and record the footer clipping, overflow, and spacing outcome: passed with no clipping or horizontal overflow and compact spacing.

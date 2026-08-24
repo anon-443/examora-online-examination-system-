@@ -116,11 +116,6 @@ export default function Home() {
               variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
               className="order-1 relative z-10 -translate-y-1 -mb-1 max-w-[36rem] sm:-translate-y-2 sm:-mb-2 lg:order-2 lg:justify-self-end lg:-translate-y-3 lg:-mb-3"
             >
-              <motion.div variants={reveal} className="relative top-2">
-                <Badge className="rounded-full border-0 bg-emerald-100 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-800 shadow-[0_8px_18px_-14px_rgba(5,150,105,0.65)] dark:bg-emerald-400/15 dark:text-emerald-300">
-                  Assessment ready
-                </Badge>
-              </motion.div>
               <motion.h1 variants={reveal} className="mt-5 font-display text-[clamp(3.05rem,4.55vw,4.45rem)] font-semibold leading-[0.93] tracking-[-0.062em] text-slate-950 dark:text-white">
                 Assess with <span className="text-emerald-600 dark:text-emerald-400">clarity</span><br />Grow with intent
               </motion.h1>
@@ -147,6 +142,7 @@ export default function Home() {
               <div className="absolute -inset-8 rounded-[3rem] bg-emerald-400/15 blur-3xl" />
               <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-slate-900 shadow-[0_30px_100px_-25px_rgba(15,23,42,0.45)] dark:border-white/10">
                 <img src="/manus-storage/examora-hero-illustration_a0ceefab.png" alt="Students completing a digital assessment" className="aspect-[16/10] w-full object-cover" />
+                <span className="absolute left-4 top-4 inline-flex items-center rounded-full border border-emerald-200/70 bg-slate-950/80 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-200 shadow-[0_10px_24px_-12px_rgba(2,6,23,0.8)] backdrop-blur-md">Assessment ready</span>
               </div>
             </motion.div>
           </div>
