@@ -66,9 +66,9 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 xl:flex">
+          <ThemeToggle />
           <NotificationBell />
           <TextSizeControl />
-          <ThemeToggle />
           {loading ? <div className="h-9 w-24 animate-pulse rounded-full bg-slate-100 dark:bg-white/10" /> : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -93,9 +93,9 @@ export function SiteHeader() {
           ) : <><Button onClick={() => startLogin()} variant="outline" className="min-h-11 rounded-full border-emerald-300 px-5 text-[15px] font-semibold text-emerald-800 hover:bg-emerald-50 dark:border-emerald-400/40 dark:text-emerald-300 dark:hover:bg-emerald-400/10">Sign up free</Button><Button onClick={() => startLogin()} className="min-h-11 rounded-full bg-slate-950 px-5 text-[15px] font-semibold text-white shadow-sm hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100">Sign in <ArrowRight className="ml-1 size-4" /></Button></>}
         </div>
         <div className="flex items-center gap-1 lg:hidden">
+          <ThemeToggle />
           <NotificationBell />
           <TextSizeControl />
-          <ThemeToggle />
           <Button variant="ghost" size="icon" onClick={() => setOpen(value => !value)} className="rounded-full" aria-label="Open navigation">
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </Button>

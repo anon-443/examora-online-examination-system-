@@ -82,7 +82,7 @@ html { font-size: 17px; scroll-behavior: smooth; }
 html[data-text-size="comfortable"] { font-size: 18px; }
 html[data-text-size="large"] { font-size: 19px; }
 body { margin: 0; min-width: 320px; background: hsl(var(--page)); color: hsl(var(--foreground)); font-family: var(--font-sans); font-size: 1.025rem; }
-p { text-align: justify; text-align-last: left; }
+p { text-align: left; }
 small, .text-xs { font-size: 0.8125rem !important; line-height: 1.25rem; }
 .text-\[10px\] { font-size: 0.75rem !important; line-height: 1rem; }
 .text-\[11px\] { font-size: 0.8125rem !important; line-height: 1.125rem; }
@@ -105,7 +105,7 @@ button:active, [role="button"]:active { transform: scale(0.98); }
 .visual-accent-card::before { content: ""; position: absolute; inset: 0 auto auto 1.5rem; width: 5rem; height: 3px; border-radius: 999px; background: linear-gradient(90deg, hsl(160 72% 42%), hsl(191 90% 55%)); opacity: 0.85; }
 .visual-accent-card::after { content: ""; position: absolute; width: 10rem; height: 10rem; right: -4rem; top: -5rem; border: 1px solid hsl(160 62% 57% / 0.2); border-radius: 999px; background: radial-gradient(circle, hsl(160 78% 74% / 0.18), transparent 68%); box-shadow: 0 0 0 1.5rem hsl(160 65% 60% / 0.06), 0 0 0 3rem hsl(160 65% 60% / 0.035); pointer-events: none; }
 .visual-accent-card > * { position: relative; z-index: 1; }
-@media (max-width: 639px) { .hero-grid { background-size: 120px 120px, 168px 168px, 34px 34px, 34px 34px; } .interactive-card:hover { transform: none; } p { text-align: left; } }
+@media (max-width: 639px) { .hero-grid { background-size: 120px 120px, 168px 168px, 34px 34px, 34px 34px; } .interactive-card:hover { transform: none; } }
 .dark .hero-orb-one { background: radial-gradient(circle at center, hsl(160 80% 34% / 0.16), transparent 68%); }
 .dark .hero-orb-two { background: radial-gradient(circle at center, hsl(228 78% 52% / 0.15), transparent 68%); }
 .dark .visual-accent-card { background-image: linear-gradient(135deg, hsl(160 52% 20% / 0.4), transparent 42%), linear-gradient(90deg, hsl(160 55% 70% / 0.06) 1px, transparent 1px), linear-gradient(hsl(160 55% 70% / 0.06) 1px, transparent 1px); }

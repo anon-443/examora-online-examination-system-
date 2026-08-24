@@ -117,9 +117,9 @@ export default function Home() {
               variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
               className="order-1 relative z-10 -translate-y-4 -mb-4 max-w-[36rem] sm:-translate-y-6 sm:-mb-6 lg:order-2 lg:justify-self-end lg:-translate-y-7 lg:-mb-7"
             >
-              <motion.div variants={reveal}>
+              <motion.div variants={reveal} className="relative top-2">
                 <Badge className="rounded-full border-0 bg-emerald-100 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-800 shadow-[0_8px_18px_-14px_rgba(5,150,105,0.65)] dark:bg-emerald-400/15 dark:text-emerald-300">
-                  <Sparkles className="mr-1.5 size-3" />Assessment considered
+                  Assessment ready
                 </Badge>
               </motion.div>
               <motion.h1 variants={reveal} className="mt-5 font-display text-[clamp(3.05rem,4.55vw,4.45rem)] font-semibold leading-[0.93] tracking-[-0.062em] text-slate-950 dark:text-white">

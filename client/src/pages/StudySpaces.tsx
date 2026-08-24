@@ -74,16 +74,16 @@ export function StudyHub() {
   return (
     <div className="min-h-screen bg-[hsl(var(--page))]">
       <SiteHeader />
-      <main className="container py-12 sm:py-18">
-        <section className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-7 py-10 text-white sm:px-10 sm:py-14">
+      <main className="container py-8 sm:py-10">
+        <section className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-7 py-7 text-white sm:px-10 sm:py-9">
           <div className="absolute -right-20 -top-20 size-72 rounded-full bg-emerald-400/20 blur-3xl" />
           <Badge className="relative border-0 bg-emerald-400/15 text-emerald-200"><Sparkles className="mr-1.5 size-3" />Study hub</Badge>
-          <h1 className="relative mt-5 max-w-2xl font-display text-4xl font-semibold tracking-[-0.06em] sm:text-6xl">A more deliberate way to prepare.</h1>
-          <p className="relative mt-5 max-w-xl text-base leading-7 text-slate-300">Choose a focus, make a short plan, and move into a timed practice experience when you are ready.</p>
-          <Button asChild className="relative mt-8 rounded-xl bg-emerald-400 font-bold text-slate-950 hover:bg-emerald-300"><Link href="/practice">Start a practice sprint <ArrowRight className="ml-1.5 size-4" /></Link></Button>
+          <h1 className="relative mt-4 max-w-4xl font-display text-4xl font-semibold tracking-[-0.06em] sm:text-5xl xl:whitespace-nowrap">A more deliberate way to prepare.</h1>
+          <p className="relative mt-4 max-w-none text-base leading-7 text-slate-300 xl:whitespace-nowrap">Choose a focus, make a short plan, and move into a timed practice experience when you are ready.</p>
+          <Button asChild className="relative mt-6 rounded-xl bg-emerald-400 font-bold text-slate-950 hover:bg-emerald-300"><Link href="/practice">Start a practice sprint <ArrowRight className="ml-1.5 size-4" /></Link></Button>
         </section>
 
-        <section className="mt-12 grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
+        <section className="mt-8 grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
           <aside className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900">
             <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-emerald-700 dark:text-emerald-400">Choose a focus</p>
             <div className="mt-4 grid gap-2">
