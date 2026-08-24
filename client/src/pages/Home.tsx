@@ -20,7 +20,6 @@ import {
   Globe2,
   History,
   Landmark,
-  Play,
   ShieldCheck,
   Sparkles,
   Target,
@@ -110,12 +109,12 @@ export default function Home() {
           <div className="hero-orb hero-orb-one" />
           <div className="hero-orb hero-orb-two" />
           <div className="hero-grid" />
-          <div className="container relative grid min-h-[455px] -translate-y-4 items-center gap-7 py-5 sm:-translate-y-2 sm:gap-10 sm:py-8 lg:min-h-[510px] lg:translate-y-1 lg:grid-cols-[1.08fr_0.92fr] lg:py-6">
+          <div className="container relative grid min-h-[430px] -translate-y-4 items-center gap-7 py-5 sm:-translate-y-2 sm:gap-10 sm:py-8 lg:min-h-[480px] lg:translate-y-1 lg:grid-cols-[1.08fr_0.92fr] lg:py-6">
             <motion.div
               initial="hidden"
               animate="visible"
               variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-              className="order-1 relative z-10 -translate-y-4 -mb-4 max-w-[36rem] sm:-translate-y-6 sm:-mb-6 lg:order-2 lg:justify-self-end lg:-translate-y-7 lg:-mb-7"
+              className="order-1 relative z-10 -translate-y-1 -mb-1 max-w-[36rem] sm:-translate-y-2 sm:-mb-2 lg:order-2 lg:justify-self-end lg:-translate-y-3 lg:-mb-3"
             >
               <motion.div variants={reveal} className="relative top-2">
                 <Badge className="rounded-full border-0 bg-emerald-100 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-800 shadow-[0_8px_18px_-14px_rgba(5,150,105,0.65)] dark:bg-emerald-400/15 dark:text-emerald-300">
@@ -126,7 +125,7 @@ export default function Home() {
                 Assess with <span className="text-emerald-600 dark:text-emerald-400">clarity</span><br />Grow with intent
               </motion.h1>
               <motion.p variants={reveal} className="mt-6 max-w-[35rem] text-[1.02rem] leading-7 text-slate-600 sm:text-[1.1rem] sm:leading-8 dark:text-slate-300">
-                Discover well-structured assessments, stay focused in a calm exam room, and turn every result into your next best step
+                Choose a focused assessment, complete it with confidence, and turn results into your next step
               </motion.p>
               <motion.div variants={reveal} className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Button onClick={startFirst} disabled={startMutation.isPending} size="lg" className="min-h-12 rounded-xl bg-slate-950 px-7 font-semibold text-white shadow-[0_14px_26px_-13px_rgba(15,23,42,0.72)] hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100">
@@ -148,15 +147,7 @@ export default function Home() {
               <div className="absolute -inset-8 rounded-[3rem] bg-emerald-400/15 blur-3xl" />
               <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-slate-900 shadow-[0_30px_100px_-25px_rgba(15,23,42,0.45)] dark:border-white/10">
                 <img src="/manus-storage/examora-hero-illustration_a0ceefab.png" alt="Students completing a digital assessment" className="aspect-[16/10] w-full object-cover" />
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent px-5 pb-5 pt-24 text-white sm:px-7 sm:pb-7">
-                  <div className="max-w-[78%]"><p className="text-xs font-bold uppercase tracking-[0.1em] text-emerald-300">Examora space</p></div>
-                  <span className="hidden size-11 shrink-0 place-items-center rounded-full border border-white/20 bg-white/10 backdrop-blur sm:grid"><Play className="ml-0.5 size-4 fill-current" /></span>
-                </div>
               </div>
-              <div className="absolute left-4 top-4 hidden w-fit rounded-2xl border border-white/80 bg-white/95 p-3.5 shadow-[0_18px_36px_-18px_rgba(15,23,42,0.45)] backdrop-blur md:block dark:border-white/10 dark:bg-slate-900/95">
-                <div className="flex items-center gap-3"><span className="grid size-8 place-items-center rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-400/15 dark:text-amber-300"><Clock3 className="size-4" /></span><div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Focus mode</p><p className="text-[15px] font-bold text-slate-800 dark:text-white">Every minute matters</p></div></div>
-              </div>
-              <div aria-hidden="true" className="absolute bottom-5 right-20 hidden items-center gap-2 rounded-full border border-white/20 bg-slate-950/35 px-3 py-2 text-[11px] font-bold tracking-wide text-white/90 backdrop-blur lg:flex"><span className="flex gap-1"><i className="size-1.5 rounded-full bg-emerald-300" /><i className="size-1.5 rounded-full bg-cyan-200" /><i className="size-1.5 rounded-full bg-violet-200" /></span>Ready when you are</div>
             </motion.div>
           </div>
         </section>

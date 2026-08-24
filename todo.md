@@ -7,3 +7,9 @@
 - [x] Lower the homepage eyebrow, remove its icon, and replace “Assessment considered” with clearer text.
 - [x] Validate the desktop and mobile refinements and run the project quality checks.
 - [x] Refine the About-page body copy to fit on one desktop line where space permits without clipping.
+- [x] Remove the unwanted homepage image overlays and simplify/lower the hero text slightly.
+- [x] Remove the remaining catalogue top gap and compact assessment cards so their controls fit earlier in the initial desktop view.
+- [x] Reduce and reformat the Study Hub dark hero panel so its text and next content fit cleanly in the initial view.
+- [x] Further reduce and align the leaderboard dark hero so ranking controls appear higher in the initial view.
+- [x] Validate the revised first-screen views and quality checks.
+- [x] Remove the remaining homepage hero artwork overlay card so the illustration is fully unobstructed.
