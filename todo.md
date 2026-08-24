@@ -21,3 +21,10 @@
 - [x] Review the full-page mobile About capture and record the footer clipping, overflow, and spacing outcome: passed with no clipping or horizontal overflow and compact spacing.
 - [x] Reduce vertical whitespace in the live assessment runner so the question, answers, timer, and progress controls fit earlier in the initial desktop view.
 - [x] Validate the compact assessment-runner layout on desktop and mobile and run quality checks.
+- [x] Move the runner timer into a clearer top-row position and compact all remaining runner gaps so the fourth answer and navigation controls fit in the initial desktop view.
+- [x] Remove the highlighted catalogue sentence and lift the remaining catalogue controls upward.
+- [x] Validate the final runner and catalogue layouts on desktop/mobile and run quality checks.
+- [x] Restore a compact visible answer-completion progress indicator in the runner without sacrificing first-screen density.
+- [x] Explicitly review the final desktop runner to confirm the timer, progress indicator, all four choices, and navigation controls fit without clipping.
+- [x] Revalidate the corrected runner and catalogue on desktop/mobile before final delivery.
+- [x] Record the explicit desktop runner review outcome for timer, compact progress bar, four answer choices, and navigation controls: passed; all are visible without clipping in the first desktop view.

@@ -122,6 +122,12 @@ button:active, [role="button"]:active { transform: scale(0.98); }
 .exam-runner > div > header + div > section > div:last-child { margin-top: 1rem; padding-top: 0.75rem; }
 .exam-runner > div > header + div > aside > button { margin-top: 1rem; }
 .exam-runner > div > header + div > aside > p:last-child { margin-top: 0.75rem; }
+.exam-runner > div > header + div > section > div:first-child { display: flex; margin-bottom: 0.4rem; }
+.exam-runner > div > header + div > section [data-slot="progress"] { display: block; height: 0.35rem; margin-top: 0 !important; }
+.exam-runner > div > header + div > section > div:nth-of-type(3) { margin-top: 0 !important; }
+.exam-runner > div > header + div > section h2 + div { margin-top: 0.65rem; gap: 0.4rem; }
+.exam-runner > div > header + div > section h2 + div > button { min-height: 2.65rem; padding: 0.55rem 0.75rem; }
+.exam-runner > div > header + div > section > div:last-child { margin-top: 0.7rem; padding-top: 0.65rem; }
 @media (min-width: 1024px) {
   .exam-runner > div > header + div { grid-template-columns: minmax(0, 1fr) 230px; }
   .exam-runner > div > header + div > section,
