@@ -4,6 +4,8 @@ Examora is a full-stack online examination platform for focused, timed multiple-
 
 > **Final-release status:** The application uses Manus OAuth, tRPC, Drizzle ORM, and MySQL/TiDB. It is deployed on Manus hosting, with a public GitHub repository, responsive desktop/mobile UI, 46 automated regression tests, production builds, and a passing GitHub Actions quality gate.
 
+> **Public-repository safety:** Environment files and runtime credentials are not committed. The source contains configuration variable names only; private values are provided by the deployment environment.
+
 ## Contents
 
 | Area | Description |

@@ -110,12 +110,12 @@ export default function Home() {
           <div className="hero-orb hero-orb-one" />
           <div className="hero-orb hero-orb-two" />
           <div className="hero-grid" />
-          <div className="container relative grid min-h-[455px] -translate-y-4 items-center gap-7 py-5 sm:-translate-y-2 sm:gap-10 sm:py-8 lg:min-h-[510px] lg:translate-y-1 lg:grid-cols-[0.92fr_1.08fr] lg:py-6">
+          <div className="container relative grid min-h-[455px] -translate-y-4 items-center gap-7 py-5 sm:-translate-y-2 sm:gap-10 sm:py-8 lg:min-h-[510px] lg:translate-y-1 lg:grid-cols-[1.08fr_0.92fr] lg:py-6">
             <motion.div
               initial="hidden"
               animate="visible"
               variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-              className="relative z-10 -translate-y-4 -mb-4 max-w-[36rem] sm:-translate-y-6 sm:-mb-6 lg:-translate-y-7 lg:-mb-7"
+              className="order-1 relative z-10 -translate-y-4 -mb-4 max-w-[36rem] sm:-translate-y-6 sm:-mb-6 lg:order-2 lg:justify-self-end lg:-translate-y-7 lg:-mb-7"
             >
               <motion.div variants={reveal}>
                 <Badge className="rounded-full border-0 bg-emerald-100 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-800 shadow-[0_8px_18px_-14px_rgba(5,150,105,0.65)] dark:bg-emerald-400/15 dark:text-emerald-300">
@@ -144,7 +144,7 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, scale: 0.97, x: 16 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15, ease: [0.23, 1, 0.32, 1] }} className="relative mx-auto w-full max-w-2xl lg:translate-x-5">
+            <motion.div initial={{ opacity: 0, scale: 0.97, x: -16 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15, ease: [0.23, 1, 0.32, 1] }} className="order-2 relative mx-auto w-full max-w-2xl lg:order-1 lg:-translate-x-5">
               <div className="absolute -inset-8 rounded-[3rem] bg-emerald-400/15 blur-3xl" />
               <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-slate-900 shadow-[0_30px_100px_-25px_rgba(15,23,42,0.45)] dark:border-white/10">
                 <img src="/manus-storage/examora-hero-illustration_a0ceefab.png" alt="Students completing a digital assessment" className="aspect-[16/10] w-full object-cover" />
