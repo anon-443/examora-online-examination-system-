@@ -130,8 +130,8 @@ export default function Home() {
                   <Link href="/exams"><Compass className="mr-1.5 size-4" />Explore catalogue</Link>
                 </Button>
               </motion.div>
-              <motion.div variants={reveal} className="mt-8 flex max-w-[35rem] flex-wrap gap-x-5 gap-y-3 border-l-2 border-emerald-400/60 pl-3 text-[13px] font-semibold text-slate-600 dark:border-emerald-400/55 dark:text-slate-300">
-                {[[Clock3, "Timed assessment flow"], [History, "Personal result history"], [ShieldCheck, "Role-secured platform"]].map(([Icon, label]) => {
+              <motion.div variants={reveal} className="mt-8 flex max-w-[35rem] flex-wrap gap-x-7 gap-y-3 border-l-2 border-emerald-400/60 pl-3 text-[13px] font-semibold text-slate-600 dark:border-emerald-400/55 dark:text-slate-300">
+                {[[Clock3, "Timed assessment flow"], [History, "Personal result history"]].map(([Icon, label]) => {
                   const FeatureIcon = Icon as typeof Clock3;
                   return <span key={String(label)} className="inline-flex items-center gap-1.5"><FeatureIcon className="size-4 text-emerald-600" />{String(label)}</span>;
                 })}

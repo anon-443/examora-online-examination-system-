@@ -28,3 +28,8 @@
 - [x] Explicitly review the final desktop runner to confirm the timer, progress indicator, all four choices, and navigation controls fit without clipping.
 - [x] Revalidate the corrected runner and catalogue on desktop/mobile before final delivery.
 - [x] Record the explicit desktop runner review outcome for timer, compact progress bar, four answer choices, and navigation controls: passed; all are visible without clipping in the first desktop view.
+- [x] Lift the runner Previous/Next controls and reduce the space above them.
+- [x] Increase the timer control’s size and visual prominence.
+- [x] Remove the homepage “Role-secured platform” proof item and rebalance the remaining proof points.
+- [x] Validate the refined runner controls and homepage proof rail on desktop/mobile and run quality checks.
+- [x] Capture post-change desktop/mobile checks for the runner timer/navigation treatment and homepage proof rail balance.
